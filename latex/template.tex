@@ -1,0 +1,232 @@
+\documentclass[a4paper,oneside]{book}
+\usepackage[export]{adjustbox}[2011/08/13]
+\usepackage{tocbibind} % for toc show inside pdf
+\usepackage[
+	%urlbordercolor = {1 1 1},
+	%linkbordercolor = {1 1 1},
+	%citebordercolor = {1 1 1},
+    bookmarksnumbered, % add bookmark number in pdf output
+	urlcolor = blue,
+	colorlinks = true,
+	citecolor = black,
+	linkcolor = black]{hyperref}
+\usepackage{graphicx}
+\usepackage{xltxtra}
+\usepackage{fancyhdr}
+\usepackage{booktabs}
+\usepackage{indentfirst}
+\usepackage{framed,color}
+\usepackage{footnpag}
+\usepackage{fancyvrb}
+\usepackage{ctable}
+\usepackage{array}
+\usepackage[font=small,format=plain,labelfont=bf,up,textfont=it,up]{caption}
+
+\usepackage{titlesec} % texlive-latex-extra package
+\usepackage[titletoc]{appendix} % this is used for \appendices
+\usepackage{afterpage}
+
+\newcommand\blankpage{%
+    \null
+    \thispagestyle{empty}%
+    \addtocounter{page}{-1}%
+    \newpage}
+
+\newcommand\makecover[1]{%
+    \clearpage
+    \begin{table}
+        \centering\includegraphics[width=1.2\textwidth,center]{#1}
+    \end{table}
+    \addtocounter{page}{-1}
+    \newpage}
+
+\definecolor{colorchapter}{RGB}{70,130,180}     % SteelBlue
+\definecolor{colorsection}{RGB}{95,158,160}    % CadetBlue
+\definecolor{colorsubsection}{RGB}{139,0,0} % DarkRed
+\definecolor{colorheader}{RGB}{70,130,180} % SteelBlue
+
+
+\titleformat{\section}
+{\color{colorsection}\normalfont\Large\bfseries}
+{\color{colorsection}\thesection}{1em}{}
+\titleformat{\subsection}
+{\color{colorsubsection}\normalfont\large\bfseries}
+{\color{colorsubsection}\thesubsection}{1em}{}
+
+\definecolor{shadecolor}{gray}{0.90}
+
+\setromanfont[Mapping=tex-text,BoldFont=<%= config['bold'] %>]{<%= config['font'] %>}
+\setmainfont{<%= config['main'] %>}
+\setmonofont{<%= config['mono'] %>}
+
+\XeTeXlinebreaklocale{<%= lang %>}
+<%= config['langrule'] %>
+
+\settowidth{\parindent}{<%= config['indent'] %>}
+\setcounter{footnote}{0}
+
+\title{{<%= config['title'] %>}}
+\author{{<%= config['author']%>}}
+
+\makeatletter
+\let\savedauthor=\@author
+\let\savedtitle=\@title
+\def\imgwidth{.6\linewidth}
+\def\maxwidth{\ifdim\Gin@nat@width>\imgwidth\imgwidth
+\else\Gin@nat@width\fi}
+\makeatother
+
+\title{\huge{\savedtitle}}
+
+\author{\textbf{\savedauthor}\thanks{<%= config['thanks'] %>}}
+\def\w3cdtfymd{\the\year-\ifnum\month<10 0\fi\the\month-\ifnum\day<10 0\fi\the\day}
+\date{\w3cdtfymd}
+%\renewcommand{\thefootnote}{\fnsymbol{footnote}}
+
+\newcommand{\PreserveBackslash}[1]{\let\temp=\\#1\let\\=\temp}
+\let\PBS=\PreserveBackslash
+\makeatletter
+  \setlength\headheight{12\p@}
+  \setlength\headsep   {.25in}
+  \setlength\topskip   {10\p@}
+  \setlength\footskip{.35in}
+  \setlength\textwidth{400\p@}
+  
+  \setlength\@tempdima{\paperheight}
+  \addtolength\@tempdima{-2in}
+  \divide\@tempdima\baselineskip
+  \@tempcnta=\@tempdima
+  \setlength\textheight{\@tempcnta\baselineskip}
+  \addtolength\textheight{\topskip}
+  
+  \setlength\@tempdima        {\paperwidth}
+  \addtolength\@tempdima      {-\textwidth}
+  \setlength\oddsidemargin    {\paperwidth}
+  \addtolength\oddsidemargin  {-2.35in}
+  \addtolength\oddsidemargin  {-\textwidth}
+  \setlength\marginparwidth   {0pt}
+  \@settopoint\oddsidemargin
+  \@settopoint\marginparwidth
+  \setlength\evensidemargin  {\paperwidth}
+  \addtolength\evensidemargin{-2.35in}
+  \addtolength\evensidemargin{-\textwidth}
+  \@settopoint\evensidemargin
+  
+  \setlength\topmargin{\paperheight}
+  \addtolength\topmargin{-2in}
+  \addtolength\topmargin{-\headheight}
+  \addtolength\topmargin{-\headsep}
+  \addtolength\topmargin{-\textheight}
+  \addtolength\topmargin{-\footskip}     % this might be wrong!
+  \addtolength\topmargin{-.5\topmargin}
+  \@settopoint\topmargin
+  %\@addtoreset{footnote}{page}  
+\makeatother
+
+%\fancypagestyle{plain}{\fancyhf{}\fancyfoot[LE,RO]{\footnotesize\textbf\thepage}}
+\fancypagestyle{plain}{\fancyhf{}\fancyfoot{}} % make sure no page number in page of first chapter
+
+\pagestyle{plain}
+
+
+\renewcommand{\headrulewidth}{0pt}
+\renewcommand{\footrulewidth}{0pt}
+
+\newcounter{img}[chapter]
+\renewcommand{\theimg}{\thechapter.\arabic{img}}
+\newcommand{\img}[1]{\begin{figure}[h!]
+	\refstepcounter{img}
+	\label{img:\theimg}
+	\centering\includegraphics[width=\maxwidth]{pic/\theimg.png}
+	\caption{#1}
+\end{figure}}
+
+\newcounter{tab}[chapter]
+\renewcommand{\thetab}{\thechapter.\arabic{tab}}
+
+\newcommand{\prechap}{<%= config['prechap'] %>}
+\newcommand{\postchap}{<%= config['postchap'] %>}
+\newcommand{\presect}{<%= config['presect'] %>}
+\newcommand{\postsect}{<%= config['postsect'] %>}
+\renewcommand{\chaptermark}[1]{\markboth{\textbf{\prechap \thechapter \postchap}\hspace*{1ex}#1}{}}
+\renewcommand{\sectionmark}[1]{\markright{\textbf{\presect \thesection \postsect}\hspace*{1ex}#1}}
+\newcommand{\chap}[1]{\newpage\thispagestyle{empty}\chapter{#1}\label{chap:\thechapter}}
+\newcommand{\chapref}[1]{\hyperref[chap:#1]{\prechap #1\postchap}}
+\newcommand{\imgref}[1]{\hyperref[img:#1]{<%= config['fig'] %>#1}}
+\newcommand{\tabref}[1]{\hyperref[tab:#1]{<%= config['tab'] %>#1}}
+\newcommand{\e}[1]{$ \times 10^{#1}$}
+\renewcommand{\contentsname}{<%= config['con'] %>}
+\renewcommand{\figurename}{<%= config['fig'] %>}
+\renewcommand{\tablename}{<%= config['tab'] %>}
+\renewcommand{\appendixname}{<%= config['appendix'] %>}
+
+% chapter 
+\makeatletter
+\def\@makechapterhead#1{%
+  \vspace*{50\p@}%
+  {\parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+      \if@mainmatter
+        \color{colorchapter}\normalfont\huge\bfseries\prechap{ }\thechapter{ }\postchap
+        \par\nobreak
+        \vskip 20\p@
+      \fi
+    \fi
+    \interlinepenalty\@M
+    \color{colorchapter}\normalfont\Huge\bfseries #1\par\nobreak
+    \vskip 40\p@
+  }}  
+ 
+% this is for non-normal chapter like Acknownledgement, Preface, Contents  
+\def\@makeschapterhead#1{%
+  \vspace*{50\p@}%
+  {\parindent \z@ \raggedright \normalfont
+    \ifnum \c@secnumdepth >\m@ne
+      \if@mainmatter
+        \color{colorchapter}\normalfont\huge\bfseries \thechapter{ }
+        \par\nobreak
+        \vskip 20\p@
+      \fi
+    \fi
+    \interlinepenalty\@M
+    \color{colorchapter}\normalfont\Huge\bfseries #1\par\nobreak
+    \vskip 40\p@
+  }}  
+\makeatother
+
+\linespread{1.3}
+
+\begin{document}
+
+%\afterpage{\blankpage}
+\makecover{<%= cover_image %>}
+
+\maketitle
+\thispagestyle{empty}
+\setcounter{tocdepth}{4}
+
+\frontmatter
+<%= preface %>
+\tableofcontents\newpage\thispagestyle{empty}
+
+% customize header & footer
+
+\fancyhf{}
+\fancyhead[LE]{\color{colorheader}\quad\small\textbf\thepage\quad\quad\small\leftmark}
+\fancyhead[RO]{\color{colorheader}\small\rightmark\quad\quad\small\textbf\thepage\quad}
+%\fancyhead[RE,LO]{\color{colorheader}\small{\savedtitle}} % book title 
+%\fancyfoot[LE,RO]{\small\textbf\thepage} % page number
+%\fancyfoot[C]{\small\textbf{hello}} % could add release information
+
+%\renewcommand{\headrulewidth}{0.4pt}  % add one line
+%\renewcommand{\headrule}{\color{red}} % conflict with headrulewidth
+\pagestyle{fancy}
+
+\mainmatter
+<%= latex %>
+
+\appendices
+\renewcommand{\prechap}{\appendixname}
+\renewcommand{\postchap}{}
+<%= appendix %>
+\end{document}

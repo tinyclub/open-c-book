@@ -1,0 +1,11 @@
+---
+  name: Hello-C-World 
+  build: pdf
+  cover: pic/cover.png
+  lang: zh
+  license: ccbyncnd30
+  config: config/main.yml
+  template: latex/template.tex
+  preface-files: preface/*.markdown
+  chapter-files: chapters/*.markdown
+  appendix-files: appendix/*.markdown 
