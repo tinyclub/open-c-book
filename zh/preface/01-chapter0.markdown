@@ -2,4 +2,4 @@
 
 Revision   Author                From         Date         Description
 ---------  -------------------   -----------  ----------   -----------
-   0.1     Wu Zhangjin/Falcon    TinyLab.org  2014/01/19   First Draft
+   0.01     Wu Zhangjin/Falcon    TinyLab.org  2014/01/19   First Draft
