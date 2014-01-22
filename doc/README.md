@@ -1,6 +1,6 @@
 
 
-# C语言程序的前世今生 
+# C语言编程透视 
 
 - Author: Wu Zhangjin <wuzhangjin@gmail.com>
 - Date  : Sun Jan 19 22:05:51 CST 2014
