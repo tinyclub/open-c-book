@@ -49,8 +49,8 @@ $ cat hello.c
 #include <stdio.h>
 int main()
 {
-        printf("hello, world\n")
-        return 0;
+	printf("hello, world\n")
+	return 0;
 }
 $ gcc -fsyntax-only hello.c
 hello.c: In function ‘main’:
@@ -209,7 +209,7 @@ Section Headers Table(节区头部表，用于链接可重定位文件成可执�
 
 void myprintf(void)
 {
-        printf("hello, world!\n");
+	printf("hello, world!\n");
 }
 ```
 
@@ -230,8 +230,8 @@ void myprintf(void);
 
 int main()
 {
-        myprintf();
-        return 0;
+	myprintf();
+	return 0;
 }
 ```
 
@@ -752,8 +752,8 @@ $ cat test.c    #就把return语句修改成_exit了。
 
 int main()
 {
-        myprintf();
-        _exit(0);
+	myprintf();
+	_exit(0);
 }
 $ gcc -g -c test.c myprintf.c
 $ ld -dynamic-linker /lib/ld-linux.so.2 -o test test.o myprintf.o -L/usr/lib -lc
@@ -815,8 +815,8 @@ $ cat test.c
 
 int main()
 {
-        myprintf();
-        _exit(0);
+	myprintf();
+	_exit(0);
 }
 $ gcc -S test.c
 $ sed -i -e "s#main#_start#g" test.s    #把汇编中的main全部改为_start，即改程序入口为_start
@@ -850,15 +850,14 @@ $ ld --verbose | grep PROVIDE | grep -v HIDDEN
 
 extern int __executable_start, etext, edata, end;
 
-int
-main ()
+int main(void)
 {
-  printf ("program entry: 0x%x \n", &__executable_start);
-  printf ("etext address(text segment): 0x%x \n", &etext);
-  printf ("edata address(initilized data): 0x%x \n", &edata);
-  printf ("end address(uninitilized data): 0x%x \n", &end);
+	printf ("program entry: 0x%x \n", &__executable_start);
+	printf ("etext address(text segment): 0x%x \n", &etext);
+	printf ("edata address(initilized data): 0x%x \n", &edata);
+	printf ("end address(uninitilized data): 0x%x \n", &end);
 
-  return 0;
+	return 0;
 }
 ```
 
