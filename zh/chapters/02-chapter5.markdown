@@ -334,15 +334,16 @@ $ cat -n /proc/self/maps
 ```
 地址                            内核空间
 0xC0000000
-                      (program flie)程序名             execve的第一个参数
+                      (program flie)程序名           execve的第一个参数
                       (environment)环境变量          execve的第三个参数，main的第三个参数
-                      (arguments)参数                  execve的第二个参数，main的形参
-                      (stack)栈                          自动变量以及每次函数调用时所需保存的信息都
-                           |                                 存放在此，包括函数返回地址、调用者的
-                          \|/                                环境信息等，函数的参数，局部变量都存放在此
+                      (arguments)参数                execve的第二个参数，main的形参
+                      (stack)栈                      自动变量以及每次函数调用时所需保存的信息都
+                           |                         存放在此，包括函数返回地址、调用者的
+                           |                         环境信息等，函数的参数，局部变量都存放在此
+                          \|/ 
                           ...
-                      (heap)堆                       主要在这里进行动态存储分配，
-                                                             比如malloc,new等。
+                      (heap)堆                       主要在这里进行动态存储分配，比如malloc,new等
+
                       .bss(uninitilized data)        没有初始化的数据（全局变量哦）
                       .data(initilized global data)  已经初始化的全局数据（全局变量）
                       .text(Executable Instructions) 通常是可执行指令
