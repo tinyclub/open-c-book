@@ -398,8 +398,8 @@ $ echo "6523-6443" | bc   #仅仅减少了80个字节
 
 ```
 $ sed -i -e "s/main/_start/g" hello.s   #因为没有初始化，所以得直接进入代码，替换main为_start
-$ as -o  hello.o hello.s
-$ ld -o hello hello.o --dynamic-linker /lib/ld-linux.so.2 -L /usr/lib -lc
+$ as --32 -o  hello.o hello.s
+$ ld -melf_i386 -o hello hello.o --dynamic-linker /lib/ld-linux.so.2 -L /usr/lib -lc
 $ ./hello
 hello world!
 $ wc -c hello
@@ -452,8 +452,8 @@ _start:
 现在编译就不再需要动态链接器ld-linux.so了，也不再需要链接任何库。
 
 ```
-$ as -o hello.o hello.s
-$ ld -o hello hello.o
+$ as --32 -o hello.o hello.s
+$ ld -melf_i386 -o hello hello.o
 $ readelf -l hello
 
 Elf file type is EXEC (Executable file)
@@ -517,8 +517,8 @@ exit:
 编译看看效果，
 
 ```
-$ as -o args.o args.s
-$ ld -o args args.o
+$ as --32 -o args.o args.s
+$ ld -melf_i386 -o args args.o
 $ ./args "Hello World"  #能够打印输入的字符串，不错
 ./args
 Hello World
@@ -676,9 +676,74 @@ $  echo "108-52-32" | bc
 24
 ```
 
+### 通过文件名传递参数
+
+对于标准的main函数的两个参数，文件名实际上作为第二个参数（数组）的第一个元素传入，如果仅仅是为了打印一个字符串，那么可以打印文件名本身。例如，要打印Hello World，可以把文件名命名为Hello World即可。
+
+这样地话，代码中就可以删除掉一条popl指令，减少1个字节，变成107个字节。
+
+```
+.global _start
+_start:
+        popl %ecx
+        popl %ecx
+        movb $10,12(%ecx)
+        xorl %edx, %edx
+        movb $13, %dl
+        xorl %eax, %eax
+        movb $4, %al
+        xorl %ebx, %ebx
+        int $0x80
+        xorl %eax, %eax
+        incl %eax
+        int $0x80
+```
+
+看看效果，
+
+```
+$ as --32 -o hello.o hello.s
+$ ld -melf_i386 -o hello hello.o
+$ sstrip hello
+$ wc -c hello
+107
+$ mv hello "Hello World"
+$ export PATH=./:$PATH
+$ Hello\ World
+Hello World
+```
+
+### 删除非必要指令
+
+在测试中发现，edx, eax, ebx的高位即使不初始化，也常为0，如果不考虑健壮性（仅这里实验用，实际使用中必须考虑健壮性），几条xorl指令可以移除掉。
+
+另外，如果只是为了演示打印字符串，完全可以不用打印换行符，这样下来，代码可以综合优化成如下几条指令：
+
+```
+.global _start
+_start:
+        popl %ecx	# argc
+        popl %ecx	# argv[0]
+        movb $5, %dl	# 设置字符串长度
+        movb $4, %al	# eax = 4, 设置系统调用号, sys_write(fd, addr, len) : ebx, ecx, edx
+	int $0x80
+        movb $1, %al
+	int $0x80
+```
+
+看看效果：
+
+```
+$ as --32 -o hello.o hello.s
+$ ld -melf_i386 -o hello hello.o
+$ sstrip hello
+$ wc -c hello
+96
+```
+
 ### 把代码移入文件头或程序头中
 
-纯粹的指令只有24个字节了，还有办法再减少目标文件的大小么？如果看了参考资料[1][1]，看样子你又要蠢蠢欲动了：这24个字节是否可以插入到文件头部或程序头部？如果可以那是否意味着还可减少可执行文件的大小呢？现在来比较一下这三部分的十六进制内容。
+纯粹的指令只有96-84=12个字节了，还有办法再减少目标文件的大小么？如果看了参考资料[1][1]，看样子你又要蠢蠢欲动了：这24个字节是否可以插入到文件头部或程序头部？如果可以那是否意味着还可减少可执行文件的大小呢？现在来比较一下这三部分的十六进制内容。
 
 ```
 $ hexdump -C hello -n 52     #文件头(52bytes)
@@ -691,13 +756,13 @@ $ hexdump -C hello -s 52 -n 32    #程序头(32bytes)
 00000034  01 00 00 00 00 00 00 00  00 80 04 08 00 80 04 08  |................|
 00000044  6c 00 00 00 6c 00 00 00  05 00 00 00 00 10 00 00  |l...l...........|
 00000054
-$ hexdump -C hello -s 84          #实际代码部分(24bytes)
-00000054  59 59 59 c6 41 0c 0a 31  d2 b2 0d 31 c0 b0 04 31  |YYY.A..1...1...1|
-00000064  db cd 80 31 c0 40 cd 80                           |...1.@..|
-0000006c
+$ hexdump -C hello -s 84          #实际代码部分(12bytes)
+hexdump -C elf -s 84
+00000054  59 59 b2 05 b0 04 cd 80  b0 01 cd 80              |YY..........|
+00000060
 ```
 
-从上面结果发现ELF文件头部和程序头部还有好些空洞(0)，是否可以通过引入跳转指令把24个字节分散放入到那些空洞里或者是直接覆盖掉那些系统并不关心的内容？抑或是把代码压缩以后放入可执行文件中，并在其中实现一个解压缩算法？还可以是通过一些代码覆盖率测试工具(gcov,prof)对你的代码进行优化？这个作为我们共同的练习吧！
+从上面结果发现ELF文件头部和程序头部还有好些空洞(0)，是否可以通过引入跳转指令把24个字节分散放入到那些空洞里或者是直接覆盖掉那些系统并不关心的内容？抑或是把代码压缩以后放入可执行文件中，并在其中实现一个解压缩算法？还可以是通过一些代码覆盖率测试工具(gcov,prof)对你的代码进行优化？这个作为我们共同的练习吧！具体答案请参考附录一。
 
 由于时间关系，这里不再进一步讨论，如果想进一步研究，请阅读参考资料[1][1]，它更深层次地讨论了ELF文件，特别是Linux系统对ELF文件头部和程序头部的解析。
 
