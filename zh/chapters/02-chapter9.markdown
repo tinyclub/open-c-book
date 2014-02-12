@@ -4,15 +4,21 @@
 
 代码写完以后往往要做测试（或验证）、调试，可能还要优化。
 
-关于测试（或验证），通常对应着两个英文单词verification和validation，在资料[1][1]中有关于这个的定义和一些深入的讨论，在资料[2][2]中，很多人给出了自己的看法。但是我想正如资料[2][2]提到的：
+- 关于测试（或验证）
 
-“The differences between verification and validation are unimportant except to the theorist; practitioners use the term V&V to refer to all ofthe activities that are aimed at making sure the software will function as required.”
+通常对应着两个英文单词verification和validation，在资料[1][1]中有关于这个的定义和一些深入的讨论，在资料[2][2]中，很多人给出了自己的看法。但是正如资料[2][2]提到的：
+
+“The differences between verification and validation are unimportant except to the theorist; practitioners use the term V&V to refer to all of the activities that are aimed at making sure the software will function as required.”
 
 所以，无论测试（或验证）目的都是为了让软件的功能能够达到需求。测试和验证通常会通过一些形式化（貌似可以简单地认为有数学根据的）或者非形式化的方法去验证程序的功能是否达到要求。
 
+- 关于调试
+
 而调试对应英文debug，debug叫“驱除害虫”，也许一个软件的功能达到了要求，但是可能会在测试或者是正常运行时出现异常，因此需要处理它们。
 
-关于优化：debug是为了保证程序的正确性，之后就需要考虑程序的执行效率，对于存储资源受限的嵌入式系统，程序的大小也可能是优化的对象。
+- 关于优化
+
+debug是为了保证程序的正确性，之后就需要考虑程序的执行效率，对于存储资源受限的嵌入式系统，程序的大小也可能是优化的对象。
 
 很多理论性的东西实在没有研究过，暂且不说吧。这里只是想把一些需要动手实践的东西先且记录和总结一下，另外很多工具在这里都有提到和罗列，包括Linux内核调试相关的方法和工具。关于更详细更深入的内容还是建议直接看后面的参考资料为妙。
 
@@ -33,7 +39,7 @@ model name      : Intel(R) Pentium(R) 4 CPU 2.80GHz
 
 ## 代码测试
 
-代码测试有很多方面呢，例如运行时间、函数调用关系图、代码覆盖度、性能测试(profiling)、内存访问越界(segmentation fault)、缓冲区溢出（stack smashing合法地进行非法的内存访问？所以很危险）、内存泄露(memory leak)等。
+代码测试有很多方面，例如运行时间、函数调用关系图、代码覆盖度、性能测试(profiling)、内存访问越界(segmentation fault)、缓冲区溢出（stack smashing合法地进行非法的内存访问？所以很危险）、内存泄露(memory leak)等。
 
 ### 测试程序的运行时间 time
 
@@ -47,7 +53,7 @@ user    0m0.008s
 sys     0m0.004s
 ```
 
-time命令给出了程序本身的运行时间。这个测试原理非常简单，就是在程序运行(通过system函数执行)前后记录了系统时间(用times函数)，然后进行求差就可以。如果程序运行时间很短，运行一次看不到效果，可以考虑采用测试纸片厚度的方法进行测试，类似把很多纸张跌倒一起来测试纸张厚度一样，我们可以让程序运行很多次。
+time命令给出了程序本身的运行时间。这个测试原理非常简单，就是在程序运行(通过system函数执行)前后记录了系统时间(用times函数)，然后进行求差就可以。如果程序运行时间很短，运行一次看不到效果，可以考虑采用测试纸片厚度的方法进行测试，类似把很多纸张叠到一起来测试纸张厚度一样，我们可以让程序运行很多次。
 
 如果程序运行时间太长，执行效率很低，那么得考虑程序内部各个部分的执行情况，从而对代码进行可能的优化。具体可能会考虑到这两点：
 
@@ -57,10 +63,9 @@ time命令给出了程序本身的运行时间。这个测试原理非常简单�
 
 ### 函数调用关系图 calltree
 
-calltree可以非常简单方便地反应一个项目的函数调用关系图，虽然诸如gprof这样的工具也能做到，不过如果仅仅要得到函数调用图，calltree应该是更好的选择。如果要产生图形化的输出可以使用它的-dot参数也可以参考资料[12][12]。从这里可以下载到它，ftp://ftp.berlios.de/pub/calltree/calltree-2.3.tar.bz2
-关于calltree的实现原理，可以参考资料[13][13]，关于它的详细用法请参考资料[14][14]或者它的-h参数获取帮助。
+calltree可以非常简单方便地反应一个项目的函数调用关系图，虽然诸如gprof这样的工具也能做到，不过如果仅仅要得到函数调用图，calltree应该是更好的选择。如果要产生图形化的输出可以使用它的`-dot`参数。从[这里](ftp://ftp.berlios.de/pub/calltree/calltree-2.3.tar.bz2)可以下载到它。
 
-这里是一份演示结果，
+这里是一份基本用法演示结果：
 
 ```
 $ calltree -b -np -m *.c
@@ -99,9 +104,9 @@ main:
 
 这样一份结果对于“反向工程”应该会很有帮助，它能够呈现一个程序的大体结构，对于阅读和分析源代码来说是一个非常好的选择。虽然cscope和ctags也能够提供一个函数调用的“即时”（在编辑vim的过程中进行调用）视图（view），但是calltree却给了我们一个宏观的视图。
 
-不过这样一个视图只涉及到用户空间的函数，如果想进一步给出内核空间的宏观视图，那么strace和KFT就可以发挥它们的作用。关于这两个工具请参考条目[11][11]列出的相关资料。另外，该视图也没有给出库中的函数，如果要跟踪呢？需要ltrace工具。
+不过这样一个视图只涉及到用户空间的函数，如果想进一步给出内核空间的宏观视图，那么strace，KFT或者Ftrace就可以发挥它们的作用。另外，该视图也没有给出库中的函数，如果要跟踪呢？需要ltrace工具。
 
-另外，我们发现，calltree仅仅给出了一个程序的函数调用视图，而没有告诉我们各个函数的执行次数等情况。如果要关注这些呢？我们有gprof。
+另外发现calltree仅仅给出了一个程序的函数调用视图，而没有告诉我们各个函数的执行次数等情况。如果要关注这些呢？我们有gprof。
 
 ### 性能测试工具 gprof & kprof
 
@@ -154,7 +159,7 @@ main:
 |   printf
 ```
 
-可以看出程序主要涉及到一个fibonacci函数，这个函数递归调用自己。为了能够使用gprof，需要编译时加上-pg选项，让gcc加入相应的调试信息以便gprof能够产生函数执行情况的报告。
+可以看出程序主要涉及到一个fibonacci函数，这个函数递归调用自己。为了能够使用gprof，需要编译时加上`-pg`选项，让gcc加入相应的调试信息以便gprof能够产生函数执行情况的报告。
 
 ```
 $ gcc -pg -o fib fib.c
@@ -220,11 +225,19 @@ Index by function name
 
 类似测试纸片厚度的方法，gprof也提供了一个统计选项，用于对程序的多次运行结果进行统计。另外，gprof有一个KDE下图形化接口kprof，这两部分请参考资料[3][3]。
 
+对于非KDE环境，可以使用[Gprof2Dot](https://code.google.com/p/jrfonseca/wiki/Gprof2Dot)把gprof输出转换成图形化结果。
+
+关于dot格式的输出，也可以可以考虑通过dot命令把结果转成jpg等格式，例如：
+
+```
+$ dot -Tjpg test.dot -o test.jp
+```
+
 gprof虽然给出了函数级别的执行情况，但是如果想关心具体哪些条件分支被执行到，哪些语句没有被执行，该怎么办？
 
 ### 代码覆盖率测试 gcov & ggcov
 
-如果要使用gcov，在编译时需要加上这两个选项 -fprofile-arcs -ftest-coverage，这里直接用之前的fib.c做演示。
+如果要使用gcov，在编译时需要加上这两个选项`-fprofile-arcs -ftest-coverage`，这里直接用之前的fib.c做演示。
 
 ```
 $ ls
@@ -233,8 +246,7 @@ $ gcc -fprofile-arcs -ftest-coverage -o fib fib.c
 $ ls
 fib  fib.c  fib.gcno
 ```
-
-运行程序，并通过gcov分析代码的覆盖度
+运行程序，并通过gcov分析代码的覆盖度：
 
 ```
 $ ./fib
@@ -256,9 +268,9 @@ Calls executed:100.00% of 4
 fib.c:creating 'fib.c.gcov'
 ```
 
-发现所有函数，条件分支和语句都被执行到，说明代码的覆盖率很高，不过资料[3][3]gprof的演示显示代码的覆盖率高并不一定说明代码的性能就好，因为那些被覆盖到的代码可能能够被优化成性能更高的代码。那到底哪些代码值得被优化呢？执行次数最多的，另外，有些分支虽然都覆盖到了，但是这个分支的位置可能并不是理想的，如果一个分支的内容被执行的次数很多，那么把它作为最后一个分支的话就会浪费很多不必要的比较时间。因此，通过覆盖率测试，可以尝试着剔除那些从未执行过的代码，通过性能测试，可以找出那些值得优化的函数、分支或者是语句。
+发现所有函数，条件分支和语句都被执行到，说明代码的覆盖率很高，不过资料[3][3]gprof的演示显示代码的覆盖率高并不一定说明代码的性能就好，因为那些被覆盖到的代码可能能够被优化成性能更高的代码。那到底哪些代码值得被优化呢？执行次数最多的，另外，有些分支虽然都覆盖到了，但是这个分支的位置可能并不是理想的，如果一个分支的内容被执行的次数很多，那么把它作为最后一个分支的话就会浪费很多不必要的比较时间。因此，通过覆盖率测试，可以尝试着剔除那些从未执行过的代码或者把那些执行次数较多的分支移动到较早的条件分支里头。通过性能测试，可以找出那些值得优化的函数、分支或者是语句。
 
-如果使用-fprofile-arcs -ftest-coverage参数编译完代码，可以接着用-fbranch-probabilities参数对代码进行编译，这样，编译器就可以对根据代码的分支测试情况进行优化。
+如果使用`-fprofile-arcs -ftest-coverage`参数编译完代码，可以接着用`-fbranch-probabilities`参数对代码进行编译，这样，编译器就可以对根据代码的分支测试情况进行优化。
 
 ```
 $ wc -c fib
@@ -275,19 +287,19 @@ user    0m18.477s
 sys     0m0.008s
 ```
 
-可见代码量减少了，而且执行效率会有所提高，当然，这个代码效率的提高可能还跟其他因素有关，比如gcc还优化了一些很平台相关的指令。
+可见代码量减少了，而且执行效率会有所提高，当然，这个代码效率的提高可能还跟其他因素有关，比如gcc还优化了一些跟平台相关的指令。
 
-如果想看看代码中各行被执行的情况，可以直接看fib.c.gcov文件。这个文件的各列依次表示执行次数、行号和该行的源代码。次数有三种情况，如果一直没有执行，那么用####表示；如果该行注释、函数声明等，用-表示；如果是纯粹的代码行，那么用执行次数表示。这样我们就可以直接分析每一行的执行情况。
+如果想看看代码中各行被执行的情况，可以直接看fib.c.gcov文件。这个文件的各列依次表示执行次数、行号和该行的源代码。次数有三种情况，如果一直没有执行，那么用`####`表示；如果该行是注释、函数声明等，用-表示；如果是纯粹的代码行，那么用执行次数表示。这样我们就可以直接分析每一行的执行情况。
 
-gprof也有一个图形化接口ggprof，是基于gtk+的，适合Gnome桌面的用户。
+gcov也有一个图形化接口ggcov，是基于`gtk+`的，适合Gnome桌面的用户。
 
 现在都已经关注到代码行了，实际上优化代码的前提是保证代码的正确性，如果代码还有很多bug，那么先要debug。不过下面的这些"bug"用普通的工具确实不太方便，虽然可能，不过这里还是把它们归结为测试的内容，并且这里刚好承接上gcov部分，gcov能够测试到每一行的代码覆盖情况，而无论是内存访问越界、缓冲区溢出还是内存泄露，实际上是发生在具体的代码行上的。
 
 ### 内存访问越界 catchsegv, libSegFault.so
 
-"segmentation fault"是很头痛的一个问题，估计“纠缠”过很多人。这里仅仅演示通过catchsegv脚本测试段错误的方法，其他方法见资料[15][15]。
+"segmentation fault"是很头痛的一个问题，估计“纠缠”过很多人。这里仅仅演示通过catchsegv脚本测试段错误的方法，其他方法见后面相关资料。
 
-catchsegv利用系统动态链接的PRELOAD机制（请参考man ld-linux），把库/lib/libSegFault.so提前load到内存中，然后通过它检查程序运行过程中的段错误。
+catchsegv利用系统动态链接的PRELOAD机制（请参考`man ld-linux`），把库/lib/libSegFault.so提前load到内存中，然后通过它检查程序运行过程中的段错误。
 
 ```
 $ cat test.c
@@ -332,7 +344,7 @@ Backtrace:
 
 ### 缓冲区溢出 libsafe.so
 
-缓冲区溢出是指栈溢出(stack smashing)，通常发生在对函数内的局部变量进行赋值操作时，超出了该变量的字节长度而引起对栈内原有数据（比如eip,ebp等）的覆盖，从而引发内存访问越界，甚至执行非法代码，导致系统崩溃。关于缓冲区的详细原理和实例分析见资料[16][16]。这里仅仅演示该资料中提到的一种用于检查缓冲区溢出的方法，它同样采用动态链接的PRELOAD机制提前装载一个名叫libsafe.so的库，你可以从这里获取它，http://www.sfr-fresh.com/linux/misc/libsafe-2.0-16.tgz，下载下来以后，再解压，编译，得到libsafe.so，
+缓冲区溢出是指栈溢出(stack smashing)，通常发生在对函数内的局部变量进行赋值操作时，超出了该变量的字节长度而引起对栈内原有数据（比如eip，ebp等）的覆盖，从而引发内存访问越界，甚至执行非法代码，导致系统崩溃。关于缓冲区的详细原理和实例分析见《C语言缓冲区溢出与注入分析》。这里仅仅演示该资料中提到的一种用于检查缓冲区溢出的方法，它同样采用动态链接的PRELOAD机制提前装载一个名叫libsafe.so的库，可以从[这里](http://www.sfr-fresh.com/linux/misc/libsafe-2.0-16.tgz)获取它，下载后，再解压，编译，得到libsafe.so，
 
 下面，演示一个非常简单的，但可能存在缓冲区溢出的代码，并演示libsafe.so的用法。
 
@@ -345,14 +357,14 @@ ABCDEFGHIJKLMN
 Aborted (core dumped)
 ```
 
-资料[6][6]分析到，如果不能够对缓冲区溢出进行有效的处理，可能会存在很多潜在的危险。虽然libsafe.so采用函数替换的方法能够进行对这类stack smashing进行一定的保护，但是无法根本解决问题，alert7大虾在资料[17][17]中提出了突破它的办法，资料[[18]18]提出了另外一种保护机制。
+资料[6][6]分析到，如果不能够对缓冲区溢出进行有效的处理，可能会存在很多潜在的危险。虽然libsafe.so采用函数替换的方法能够进行对这类stack smashing进行一定的保护，但是无法根本解决问题，alert7大虾在资料[17][17]中提出了突破它的办法，资料[18]18]提出了另外一种保护机制。
 
 ### 内存泄露 Memwatch, Valgrind, mtrace
 
 堆栈通常会被弄在一起叫，不过这两个名词却是指进程的内存映像中的两个不同的部分，栈(stack)用于函数的参数传递、局部变量的存储等，是系统自动分配和回收的；而堆(heap)则是用户通过malloc等方式申请而且需要用户自己通过free释放的，如果申请的内存没有释放，那么将导致内存泄露，进而可能导致堆的空间被用尽；而如果已经释放的内存再次被释放(double-free)则也会出现非法操作。(如果要真正理解堆和栈的区别，需要理解进程的内存映像，请参考资料[22][22])
 
-这里演示通过Memwatch来检测程序中可能存在内存泄露，你可以从这里下载到这个工具，http://www.linkdata.se/sourcecode.html
-使用这个工具的方式很简单，只要把它链接(ld)到可执行文件中去，并在编译时加上两个宏开关-DMEMWATCH -DMW_STDIO。这里演示一个简单的例子。
+这里演示通过Memwatch来检测程序中可能存在内存泄露，可以从[这里](http://www.linkdata.se/sourcecode.html)下载到这个工具。
+使用这个工具的方式很简单，只要把它链接(ld)到可执行文件中去，并在编译时加上两个宏开关`-DMEMWATCH -DMW_STDIO`。这里演示一个简单的例子。
 
 ```
 $ cat test.c 
@@ -362,15 +374,15 @@ $ cat test.c
 
 int main(void)
 {
-  char *ptr1;
-  char *ptr2;
+	char *ptr1;
+	char *ptr2;
 
-  ptr1 = malloc(512);
-  ptr2 = malloc(512);
+	ptr1 = malloc(512);
+	ptr2 = malloc(512);
 
-  ptr2 = ptr1;
-  free(ptr2);
-  free(ptr1);
+	ptr2 = ptr1;
+	free(ptr2);
+	free(ptr1);
 }
 $ gcc -DMEMWATCH -DMW_STDIO test.c memwatch.c -o test
 $ cat memwatch.log
@@ -402,7 +414,7 @@ Memory usage statistics (global):
 
 ### 静态调试：printf + gcc -D（打印程序中的变量）
 
-利用gcc的宏定义开关(-D)和printf函数可以跟踪程序中某个位置的状态，这个状态包括当前一些变量和寄存器的值。调试时需要用-D开关进行编译，在正式发布程序时则可把-D开关去掉。这样做比单纯用printf方便很多，它可以避免清理调试代码以及由此带来的误删除代码等问题。
+利用gcc的宏定义开关(-D)和printf函数可以跟踪程序中某个位置的状态，这个状态包括当前一些变量和寄存器的值。调试时需要用-D开关进行编译，在正式发布程序时则可把-D开关去掉。这样做比单纯用printf方便很多，它可以避免清理调试代码以及由此带来的代码误删除等问题。
 
 ```
 $ cat test.c
@@ -429,7 +441,7 @@ i = 0
 ebp = 0xbfb56d98
 ```
 
-上面演示了如何跟踪普通变量和寄存器变量的办法。跟踪寄存器变量采用了内联汇编，关于Linux下的汇编语言开发请参考资料[[19]19]。
+上面演示了如何跟踪普通变量和寄存器变量的办法。跟踪寄存器变量采用了内联汇编。
 
 不过，这种方式不够灵活，我们无法“即时”获取程序的执行状态，而gdb等交互式调试工具不仅解决了这样的问题，而且通过把调试器拆分成调试服务器和调试客户端适应了嵌入式系统的调试，另外，通过预先设置断点以及断点处需要收集的程序状态信息解决了交互式调试不适应实时调试的问题。
 
@@ -457,7 +469,7 @@ gdb比gdbserver大了将近97%，如果把整个gdb搬到存储空间受限的�
 - --host，指定gdb/gdbserver本身的运行平台，
 - --target，指定gdb/gdbserver调试的代码所运行的平台，
 
-关于运行平台，通过$MACHTYPE环境变量就可获得，对于gdbserver，因为要把它复制到嵌入式目标系统上，并且用它来调试目标平台上的代码，因此需要把--host和--target都设置成目标平台；而gdb因为还是运行在本地主机上，但是需要用它调试目标系统上的代码，所以需要把--target设置成目标平台。
+关于运行平台，通过`$MACHTYPE`环境变量就可获得，对于gdbserver，因为要把它复制到嵌入式目标系统上，并且用它来调试目标平台上的代码，因此需要把--host和--target都设置成目标平台；而gdb因为还是运行在本地主机上，但是需要用它调试目标系统上的代码，所以需要把--target设置成目标平台。
 
 编译完以后就是调试，调试时需要把程序交叉编译好，并把二进制文件复制一份到目标系统上，并在本地需要保留一份源代码文件。调试过程大体如下，首先在目标系统上启动调试服务器：
 
@@ -479,11 +491,11 @@ $ gdb
 
 #### 汇编代码的调试 ald ####
 
-用gdb调试汇编代码貌似会比较麻烦，不过有人正是因为这个原因而开发了一个专门的汇编代码调试器，名字就叫做assembly language debugger，简称ald，你可以从这里下载到，http://ald.sourceforge.net/
+用gdb调试汇编代码貌似会比较麻烦，不过有人正是因为这个原因而开发了一个专门的汇编代码调试器，名字就叫做assembly language debugger，简称ald，你可以从[这里](http://ald.sourceforge.net/)下载到。
 
-下载以后，解压编译后，我们来调试一个程序看看。
+下载后，解压编译，我们来调试一个程序看看。
 
-这里是一段非常简短的汇编代码，摘自参考资料[20][20]
+这里是一段非常简短的汇编代码：
 
 ```
 .global _start 
@@ -503,18 +515,25 @@ _start:
         int $0x80
 ```
 
-演示一下，
+汇编、链接、运行：
 
 ```
-//汇编、链接、运行
 $ as -o test.o test.s
 $ ld -o test test.o
 $ ./test "Hello World"
 Hello World
-//查看程序的入口地址
+```
+
+查看程序的入口地址：
+
+```
 $ readelf -h test | grep Entry 
   Entry point address:               0x8048054
-//调试
+```
+
+接着用ald调试： 
+
+```
 $ ald test
 ald> display
 Address 0x8048054 added to step display list
@@ -537,19 +556,19 @@ Dumping 64 bytes of memory starting at 0x08048054 in hex
 
 可见ald在启动时就已经运行了被它调试的test程序，并且进入了程序的入口0x8048054，紧接着单步执行时，就执行了程序的第一条指令popl ecx。
 
-ald的命令很少，而且跟gdb很类似，比如这个几个命令用法和名字都类似 help,next,continue,set args,break,file,quit,disassemble,enable,disable等名字不太一样，功能对等的，examine对x, enter 对 set variable {int}地址=数据
+ald的命令很少，而且跟gdb很类似，比如这个几个命令用法和名字都类似 help,next,continue,set args,break,file,quit,disassemble,enable,disable等。名字不太一样但功能对等的有：examine对x, enter 对 set variable {int}地址=数据。
 
-需要提到的是：linux下的调试器包括上面的gdb和ald，以及strace等都用到了linux系统提供的ptrace()系统调用，这个调用为用户访问内存映像提供了便利，如果想自己写一个调试器或者想hack一下gdb和ald，那么好好阅读资料[10]和man ptrace吧。
+需要提到的是：Linux下的调试器包括上面的gdb和ald，以及strace等都用到了Linux系统提供的ptrace()系统调用，这个调用为用户访问内存映像提供了便利，如果想自己写一个调试器或者想hack一下gdb和ald，那么好好阅读资料[10]和`man ptrace`吧。
 
 ### 实时调试：gdb tracepoint
 
 对于程序状态受时间影响的程序，用上述普通的设置断点的交互式调试方法并不合适，因为这种方式将由于交互时产生的通信延迟和用户输入命令的时延而完全改变程序的行为。所以gdb提出了一种方法以便预先设置断点以及在断点处需要获取的程序状态，从而让调试器自动执行断点处的动作，获取程序的状态，从而避免在断点处出现人机交互产生时延改变程序的行为。
 
-这种方法叫tracepoints(对应breakpoint)，它在gdb的user manual(见资料[21][21])里头有详细的说明，不过在gdb的官方发行版中至今都没有对它的实现。尽管如此，我们还是可以使用它，因为有其他组织做了相关的工作，并以补丁的方式发布它。这个补丁你可以从这里获取ftp://dslab.lzu.edu.cn/pub/gdb_tracepoints
+这种方法叫tracepoints(对应breakpoint)，它在gdb的user manual里头有详细的说明，不过在gdb的官方发行版中至今都没有对它的实现。尽管如此，我们还是可以使用它，因为有其他组织做了相关的工作，并以补丁的方式发布它。这个补丁可以从[这里](ftp://dslab.lzu.edu.cn/pub/gdb_tracepoints)获取。
 
-获取这个补丁以后，要做的就是把它patch到对应的gdb版本中，然后就是编译。因为tracepoints只定义在调试服务器和调试客户端这种方式中，因此在这个实现中也是这样，如果想用它，你同样需要编译gdbserver和gdb，并类似嵌入式系统中的调试方法一样调试它。
+获取这个补丁以后，要做的就是把它patch到对应的gdb版本中，然后就是编译。因为tracepoints只定义在调试服务器和调试客户端这种方式中，因此在这个实现中也是这样，如果想用它，同样需要编译gdbserver和gdb，并类似嵌入式系统中的调试方法一样调试它。
 
-编译好以后通过ftp://dslab.lzu.edu.cn/pub/gdb_tracepoints/paper/tp.pdf和资料[21][21]就可以使用它。
+编译好以后通过参考[资料](ftp://dslab.lzu.edu.cn/pub/gdb_tracepoints/paper/tp.pdf)就可以使用它。
 
 ### 调试内核
 
@@ -557,14 +576,14 @@ ald的命令很少，而且跟gdb很类似，比如这个几个命令用法和�
 
 ## 代码优化
 
-除了资料[21][21]中的实践之外，我想我“应该”没有做过其他的项目优化工作吧，所以很遗憾，这里无法进行讨论了，不过我还是找了很多相关资料的，就让大家一起分享吧，这些资料都列在条目里。
+这部分暂时没有准备足够的素材，有待进一步完善。
 
-实际上呢？“代码测试”部分介绍的很多工具是为代码优化服务的，更多具体的细节请参考后面的资料，自己做实验吧。有任何相关的感兴趣的话题欢迎给我邮件zhangjinw@gmail.com。
+实际上呢？“代码测试”部分介绍的很多工具是为代码优化服务的，更多具体的细节请参考后续资料，自己做实验吧。
 
 ## 参考资料
 
--  [VERIFICATION AND VALIDATION][1]
--  [difference between verification and Validation][2]
+- [VERIFICATION AND VALIDATION][1]
+- [difference between verification and Validation][2]
 - [Coverage Measurement and Profiling(覆盖度测量和性能测试,Gcov and Gprof)][3]
 - Valgrind Usage：[Valgrind HOWTO][4]，[Using Valgrind to Find Memory Leaks and Invalid Memory Use][5]
 - [MEMWATCH][6]
@@ -572,12 +591,12 @@ ald的命令很少，而且跟gdb很类似，比如这个几个命令用法和�
 - [Software Performance Analysis][8]
 - [Runtime debugging in embedded systems][9]
 - Tools Provided by System：ltrace,mtrace,strace
--   Write your own debugger with the support ptrace()
+- Write your own debugger with the support ptrace()
     - Process Tracing Using Ptrace
     - Playing with ptrace
 - Kernel Debugging Related Tools：KGDB, KGOV, KFI/KFT/Ftrace, GDB Tracepoint，UML, kdb
 - 用Graphviz进行可视化操作──绘制函数调用关系图
-- 用 Graphviz 可视化函数调用
+- 用Graphviz 可视化函数调用
 - 介绍一个linux下生成C代码调用树的好工具calltree
 - 可恶的"Segmentation faults"之初级总结篇
 - Linux下缓冲区溢出攻击的原理及对策
