@@ -3,8 +3,8 @@
 
 ## Introduction
 
-- Project Homepage
-- Project Repository
+- Project Homepage: <http://www.tinylab.org/project/hello-c-world/>
+- Project Repository: [git@gitorious.org:tinylab/hello-c-world.git](https://gitorious.org/tinylab/hello-c-world/)
 
 Please check doc/BUILD.md for building and doc/README.md for the project details.
 
