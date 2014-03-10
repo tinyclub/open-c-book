@@ -1,7 +1,7 @@
 ---
   name: Hello-C-World 
   build: pdf
-  cover: pic/cover.png
+  cover: pic/tinylab.org-sina-QR-Code.png
   lang: zh
   license: ccbyncnd30
   config: config/main.yml
