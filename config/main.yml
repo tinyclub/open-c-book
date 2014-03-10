@@ -15,7 +15,7 @@ default:
   fig: "Figure "
   tab: "Table "
   indent: "\\qquad"
-  thanks: "\\url{http://TinyLab.org}是一个开放的嵌入式系统研发社区，致力于嵌入式Linux产品级系统解决方案的研发与交流。该书是其成员Wu Zhangjin/Falcon基于早年编写的一序列关于C语言编程的技术博客整理而成，现作为自由书籍发布，其项目首页为\\url{http://www.tinylab.org/project/hello-c-world/}。"
+  thanks: "\\url{http://TinyLab.org}是一个开放的嵌入式系统研发社区，致力于嵌入式Linux产品级系统解决方案的研发与交流。该书是其成员Wu Zhangjin/Falcon基于早年编写的一序列关于C语言编程的技术博客整理而成，现作为自由书籍发布，其项目首页为\\url{http://www.tinylab.org/project/hello-c-world/}。如需获取更多资讯并实时交互，请关注我们的{\\color{red}新浪微博@泰晓\\_TinyLab}：\\url{http://weibo.com/tinylaborg}。"
 zh:
   title: C语言编程透视 
   author: TinyLab.org | 泰晓实验室
