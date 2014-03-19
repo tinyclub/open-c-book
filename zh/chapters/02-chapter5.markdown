@@ -698,7 +698,7 @@ int main()
 编译一下看看结果：
 
 ```
-$ gcc -DSTR1 -o testshellcode testshellcode.c  #通过-D定义宏STR1，从而采用第一个                                                                                 #STR_SRC的值，即"AAAAAAA\0\1\0\0\0"
+$ gcc -DSTR1 -o testshellcode testshellcode.c  #通过-D定义宏STR1，从而采用第一个STR_SRC的值
 $ ./testshellcode
 sum = 1
 ```
@@ -928,6 +928,7 @@ $ gcc -D STR3 -o testshellcode testshellcode.c
 $ ./testshellcode         #现在没有段错误了吧，因为ebp得到了“保护”
 sum = 6
 ```
+
 ### 如何保护eip不被修改？
 
 如果我们复制更多的字节过去了，比如再多复制四个字节进去，那么eip就被覆盖了。
