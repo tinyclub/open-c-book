@@ -18,6 +18,7 @@ def main()
         "build"=> "pdf",
         "lang" => "zh",
         "cover"         => "pic/cover.png",
+        "cover_desc"    => "",
         "config"        => "config/main.yml",
         "template"      => "latex/template.tex",
         "chapter-files" => "*/*.markdown",
@@ -277,7 +278,10 @@ def generate_pdf(options)
             puts "#{lang}:"
            
 	    cover_image = options['cover']
-	    puts "\n\tUsing Cover Image: #{options['cover']}\n\n"
+	    puts "\n\tUsing Cover Image: #{options['cover']}\n"
+	    
+	    cover_desc = options['cover_desc']
+	    puts "\tUsing Cover Description: #{options['cover_desc']}\n\n"
 
             prefacefiles = "#$root/#{lang}/#{options['preface-files']}"
 

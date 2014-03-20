@@ -33,10 +33,11 @@
     \addtocounter{page}{-1}%
     \newpage}
 
-\newcommand\makecover[1]{%
+\newcommand\makecover[2]{%
     \clearpage
     \begin{table}
-        \centering\includegraphics[center]{#1}
+        \centering\includegraphics[width=\imgwidth,center]{#1}
+        \centering\large{#2}
     \end{table}
     \addtocounter{page}{-1}
     \newpage}
@@ -72,7 +73,7 @@
 \makeatletter
 \let\savedauthor=\@author
 \let\savedtitle=\@title
-\def\imgwidth{0.8\linewidth}
+\def\imgwidth{0.5\linewidth}
 \def\maxwidth{\ifdim\Gin@nat@width>\imgwidth\imgwidth
 \else\Gin@nat@width\fi}
 \makeatother
@@ -200,7 +201,7 @@
 \begin{document}
 
 %\afterpage{\blankpage}
-\makecover{<%= cover_image %>}
+\makecover{<%= cover_image %>}{<%= cover_desc %>}
 
 \maketitle
 \thispagestyle{empty}
