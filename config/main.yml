@@ -15,7 +15,7 @@ default:
   fig: "Figure "
   tab: "Table "
   indent: "\\qquad"
-  thanks: "泰晓科技：\\url{http://TinyLab.org}专注于产品级嵌入式Linux研发与交流，欢迎关注我们的新浪微博 {\\color{red}@泰晓科技}：\\url{http://weibo.com/tinylaborg}。该书是其创办者 {\\color{red}@吴章金falcon} 基于早年技术博客整理而成，现作为自由书籍发布，其项目首页为\\url{http://www.tinylab.org/project/hello-c-world/}。"
+  thanks: "泰晓科技：\\url{http://TinyLab.org}专注于产品级嵌入式Linux系统研发与交流，欢迎关注我们的新浪微博 {\\color{red}@泰晓科技}：\\url{http://weibo.com/tinylaborg}。该书是其创办者 {\\color{red}@吴章金falcon} 基于早年技术博客整理而成，现作为自由书籍发布，其项目首页为\\url{http://www.tinylab.org/project/hello-c-world/}。"
 zh:
   title: C语言编程透视 
   author: TinyLab.org | 泰晓科技
