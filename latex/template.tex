@@ -33,11 +33,15 @@
     \addtocounter{page}{-1}%
     \newpage}
 
-\newcommand\makecover[2]{%
+\newcommand\makecover[4]{%
     \clearpage
     \begin{table}
-        \centering\includegraphics[width=\imgwidth,center]{#1}
+%        \centering\includegraphics[width=\imgwidth,center]{#1}
+        \centering\includegraphics[width=150pt,center]{#1}
         \centering\large{#2}
+%        \centering\includegraphics[width=\imgwidth,center]{#3}
+        \centering\includegraphics[width=160pt,center]{#3}
+        \centering\large{#4}
     \end{table}
     \addtocounter{page}{-1}
     \newpage}
@@ -139,7 +143,7 @@
 \newcommand{\img}[1]{\begin{figure}[h!]
 	\refstepcounter{img}
 	\label{img:\theimg}
-	\centering\includegraphics[width=\maxwidth]{pic/\theimg.png}
+	\centering\includegraphics[width=\maxwidth]{pic/\theimg.jpg}
 	\caption{#1}
 \end{figure}}
 
@@ -201,7 +205,7 @@
 \begin{document}
 
 %\afterpage{\blankpage}
-\makecover{<%= cover_image %>}{<%= cover_desc %>}
+\makecover{<%= cover_image1 %>}{<%= cover_desc1 %>}{<%= cover_image2 %>}{<%= cover_desc2 %>}
 
 \maketitle
 \thispagestyle{empty}

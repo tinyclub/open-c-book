@@ -17,8 +17,10 @@ def main()
     options = {
         "build"=> "pdf",
         "lang" => "zh",
-        "cover"         => "pic/cover.png",
-        "cover_desc"    => "",
+        "cover1"        => "pic/cover.png",
+        "cover_desc1"   => "",
+        "cover2"        => "pic/cover.png",
+        "cover_desc2"   => "",
         "config"        => "config/main.yml",
         "template"      => "latex/template.tex",
         "chapter-files" => "*/*.markdown",
@@ -277,11 +279,17 @@ def generate_pdf(options)
 
             puts "#{lang}:"
            
-	    cover_image = options['cover']
-	    puts "\n\tUsing Cover Image: #{options['cover']}\n"
+	    cover_image1 = options['cover1']
+	    puts "\n\tUsing Cover Image 1: #{options['cover1']}\n"
 	    
-	    cover_desc = options['cover_desc']
-	    puts "\tUsing Cover Description: #{options['cover_desc']}\n\n"
+	    cover_desc1 = options['cover_desc1']
+	    puts "\tUsing Cover Description 1: #{options['cover_desc1']}\n\n"
+
+	    cover_image2 = options['cover2']
+	    puts "\n\tUsing Cover Image 2: #{options['cover2']}\n"
+
+	    cover_desc2 = options['cover_desc2']
+	    puts "\tUsing Cover Description 2: #{options['cover_desc2']}\n\n"
 
             prefacefiles = "#$root/#{lang}/#{options['preface-files']}"
 
