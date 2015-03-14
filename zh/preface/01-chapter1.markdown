@@ -58,10 +58,10 @@
 
 打算重新规划、增补整个序列，并以开源项目的方式持续维护，并通过[TinLab.org](http://tinylab.org)平台接受读者的反馈，直到正式发行出版。
 
-自由书籍将会维护在TinyLab的[项目仓库](https://gitorious.org/tinylab/hello-c-world)中。项目相关信息如下：
+自由书籍将会维护在TinyLab的[项目仓库](https://gitlab.com/tinylab/hello-c-world)中。项目相关信息如下：
 
 -   项目首页：<http://www.tinylab.org/project/hello-c-world/>
--   代码仓库：[https://git.gitorious.org/tinylab/hello-c-world.git](https://gitorious.org/tinylab/hello-c-world)
+-   代码仓库：[https://gitlab.com/tinylab/hello-c-world.git](https://gitlab.com/tinylab/hello-c-world)
 
 欢迎大家指出本书初稿中的不足，甚至参与到相关章节的写作、校订和完善中来。
 
