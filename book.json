@@ -1,0 +1,37 @@
+{
+    "author": "Wu Zhangjin <wuzhangjin@gmail.com>",
+    "description": "这是开源书籍《C语言编程透视》的 GitBook 版本",
+    "extension": null,
+    "generator": "site",
+    "isbn": null,
+    "links": {
+        "sharing": {
+            "all": null,
+            "facebook": null,
+            "google": null,
+            "twitter": null,
+            "weibo": null
+        },
+        "sidebar": {
+            "泰晓科技": "http://www.tinylab.org",
+            "C语言编程透视": "http://www.tinylab.org/project/hello-c-world"
+        }
+    },
+    "output": null,
+    "pdf": {
+        "fontSize": 12,
+        "footerTemplate": null,
+        "headerTemplate": null,
+        "margin": {
+            "bottom": 36,
+            "left": 62,
+            "right": 62,
+            "top": 36
+        },
+        "pageNumbers": false,
+        "paperSize": "a4"
+    },
+    "plugins": [],
+    "title": "C语言编程透视",
+    "variables": {}
+}
