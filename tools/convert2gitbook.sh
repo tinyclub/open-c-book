@@ -15,3 +15,7 @@ find $LANG/ -name "*.markdown*" | xargs -i grep -Hr "^# " {} \
 # Note: config/basic.yml doesn't use pic/cover.png currently.
 
 convert pic/cover.png cover.jpg
+
+# copy images to zh/
+cp -r pic/ zh/chapters/
+cp -r pic/ zh/preface/
