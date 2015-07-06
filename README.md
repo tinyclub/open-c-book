@@ -1,5 +1,6 @@
 # Open-C-Book: The Perspective Of The C Language Programming #
 
+v0.1
 
 ## Introduction
 
