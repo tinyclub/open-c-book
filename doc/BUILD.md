@@ -1,5 +1,12 @@
 # Introduction #
 
+gitbook is supported, please [install gitbook](http://www.tinylab.org/docker-quick-start-docker-gitbook-writing-a-book/) and simply build it as followiing:
+
+    $ gitbook build
+    $ gitbook pdf
+
+Otherwise, please read the left parts:
+
 As open source books, ebooks and pdf format should be created on fly, the following sections describe those solution in detail.
 
 The solution below is based on [Pro Git][progit]; while it is little updated on format inside. 
