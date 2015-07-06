@@ -16,7 +16,7 @@
 《Shell编程序列》已经作为自由书籍发布：
 
 - Project Homepage: <http://www.tinylab.org/project/pleac-shell/>
-- Project Repository: [https://gitlab.com/tinylab/pleac-shell.git](https://gitlab.com/tinylab/pleac-shell)
+- Project Repository: [https://github.com/tinyclub/open-c-book.git](https://github.com/tinyclub/open-c-book)
 
 ## Outline
 
