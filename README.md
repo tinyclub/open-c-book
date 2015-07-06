@@ -1,4 +1,4 @@
-# Hello-C-World: The development procedure of C Program #
+# Open-C-Book: The Perspective Of The C Language Programming #
 
 
 ## Introduction
@@ -15,4 +15,4 @@ correction, please email me at wuzhangjin at gmail dot com to inform me.
 
 ### License
 
-The license is under ![](http://i.creativecommons.org/l/by-nc-nd/3.0/88x31.png), see [CC BY NC ND 3.0](http://creativecommons.org/licenses/by-nc-nd/3.0/) for more
+The license is under ![](http://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png), see [CC BY NC ND 4.0](http://creativecommons.org/licenses/by-nc-nd/4.0/) for more
