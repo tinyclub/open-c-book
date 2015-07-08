@@ -1,3 +1,7 @@
+> 本书-来源：[开源书籍：C 语言编程透视](http://www.tinylab.org/project/hello-c-world/) (by [泰晓科技](http://tinylab.org))<br>
+> 报名/参与：*Star/fork* [open-c-book github 仓库](https://github.com/tinyclub/open-c-book); *关注/私信* [@泰晓科技](http://weibo.com/tinylaborg)  <br>
+
+
 # C 语言编程透视
 
 v0.1
