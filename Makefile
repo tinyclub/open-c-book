@@ -22,9 +22,11 @@ bookOutput := $(outDir)/$(long_fileName)
 
 # build targets
 all: $(bookInput)
+	gitbook build
 
 $(bookInput): clean
 	@$(make_pdf)
+	gitbook pdf
 
 read:
 	evince $(bookInput)
