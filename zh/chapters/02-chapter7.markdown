@@ -318,45 +318,45 @@
 
 - 应用程序的代码
 
-    $ cat app.sh
-    #!/bin/bash
-
-    FIFO=fifo_test
-    while :;
-    do
-    	CI=`cat $FIFO`  #CI --> Control Info
-    	case $CI in
-    	    0) echo "The CONTROL number is ZERO, do something ..."
-    		    ;;
-    	    1) echo "The CONTROL number is ONE, do something ..."
-    		    ;;
-    	    *) echo "The CONTROL number not recognized, do something else..."
-    		    ;;
-    	esac
-    done
+        $ cat app.sh
+        #!/bin/bash
+        
+        FIFO=fifo_test
+        while :;
+        do
+        	CI=`cat $FIFO`  #CI --> Control Info
+        	case $CI in
+        	    0) echo "The CONTROL number is ZERO, do something ..."
+        		    ;;
+        	    1) echo "The CONTROL number is ONE, do something ..."
+        		    ;;
+        	    *) echo "The CONTROL number not recognized, do something else..."
+        		    ;;
+        	esac
+        done
 
 - 控制程序的代码
 
-    $ cat control.sh
-    #!/bin/bash
-
-    FIFO=fifo_test
-    CI=$1
-
-    [ -z "$CI" ] && echo "the control info should not be empty" && exit 
-
-    echo $CI > $FIFO
+        $ cat control.sh
+        #!/bin/bash
+        
+        FIFO=fifo_test
+        CI=$1
+        
+        [ -z "$CI" ] && echo "the control info should not be empty" && exit 
+        
+        echo $CI > $FIFO
 
 - 一个程序通过管道控制另外一个程序的工作
 
-    $ chmod +x app.sh control.sh    #修改这两个程序的可执行权限，以便用户可以执行它们
-    $ ./app.sh  #在一个终端启动这个应用程序，在通过./control.sh发送控制码以后查看输出
-    The CONTROL number is ONE, do something ...    #发送1以后
-    The CONTROL number is ZERO, do something ...    #发送0以后
-    The CONTROL number not recognized, do something else...  #发送一个未知的控制码以后
-    $ ./control.sh 1            #在另外一个终端，发送控制信息，控制应用程序的工作
-    $ ./control.sh 0
-    $ ./control.sh 4343
+        $ chmod +x app.sh control.sh    #修改这两个程序的可执行权限，以便用户可以执行它们
+        $ ./app.sh  #在一个终端启动这个应用程序，在通过./control.sh发送控制码以后查看输出
+        The CONTROL number is ONE, do something ...    #发送1以后
+        The CONTROL number is ZERO, do something ...    #发送0以后
+        The CONTROL number not recognized, do something else...  #发送一个未知的控制码以后
+        $ ./control.sh 1            #在另外一个终端，发送控制信息，控制应用程序的工作
+        $ ./control.sh 0
+        $ ./control.sh 4343
 
 这样一种应用架构非常适合本地的多程序任务设计，如果结合`web cgi`，那么也将适合远程控制的要求。引入`web cgi`的唯一改变是，要把控制程序`./control.sh`放到web的cgi目录下，并对它作一些修改，以使它符合CGI的规范，这些规范包括文档输出格式的表示(在文件开头需要输出`content-tpye: text/html`以及一个空白行)和输入参数的获取(web输入参数都存放在`QUERY_STRING`环境变量里头)。因此一个非常简单的CGI控制程序可以写成这样：
 
