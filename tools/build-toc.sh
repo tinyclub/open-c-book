@@ -1,22 +1,32 @@
 #!/bin/bash
 #
-# Build toc automatically
+# Build toc for markdown automatically
 #
 
 for i in *.markdown
 do
+    # Generate a random toc id to avoid conflict
+    toc="toc_${RANDOM}_${RANDOM}_"
 
+    # Generate table of content
     sed -i -e "2i\n" $i
 
-    grep "^##" -ur $i |\
-        egrep -n -v "include|ifdef|endif|undef|define|ifndef|update|file|date|funct|author" |\
+    grep "^###* " -ur $i | grep -n "^#" | \
         sed -e "s/:/a/g;" |\
-	sed -e "s/\(#[^ ]*\) \(.*\)/\1 [\2](#\2)/g" |\
+	sed -e "s/\([0-9]*\)a\(#[^ ]*\) \(.*\)/\1a\2 [\3](#$toc\1)/g" |\
 	sed -e "s/#####/+            -   /g;s/####/+        -   /g" |\
 	sed -e "s/###/+    -   /g;s/##/-   /g" |\
 	xargs -i sed -i -e "{}" $i;
 
     sed -i -e "2i\n" $i
-    sed -i -e "s/^+   /   /g" $i
-    sed -i -e "s/^n//g" $i
+    sed -i -e "s/^+   /   /g;s/^n$//g" $i
+
+    # Replace the #* with h* + id info
+    t=0
+    for line in `grep -n "^##" $i | cut -d':' -f1`
+    do
+	((line+=t))
+	((t++))
+        sed -i -e "${line}i<span id=\"$toc$t\"></span>" $i
+    done
 done
