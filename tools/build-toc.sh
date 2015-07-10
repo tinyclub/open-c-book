@@ -9,7 +9,7 @@ do
     toc="toc_${RANDOM}_${RANDOM}_"
 
     # Generate table of content
-    sed -i -e "2i\n" $i
+    sed -i -e '2i\\' $i
 
     grep "^###* " -ur $i | grep -n "^#" | \
         sed -e "s/:/a/g;" |\
@@ -18,8 +18,8 @@ do
 	sed -e "s/###/+    -   /g;s/##/-   /g" |\
 	xargs -i sed -i -e "{}" $i;
 
-    sed -i -e "2i\n" $i
-    sed -i -e "s/^+   /   /g;s/^n$//g" $i
+    sed -i -e '2i\\' $i
+    sed -i -e "s/^+   /   /g;" $i
 
     # Replace the #* with h* + id info
     t=0
