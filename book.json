@@ -6,6 +6,7 @@
         "sidebar": {
             "泰晓科技": "http://www.tinylab.org",
             "项目首页": "http://www.tinylab.org/project/hello-c-world",
+            "嵌入式 Linux 知识库": "http://tinylab.gitbooks.io/elinux",
             "Shell 编程范例": "http://tinylab.gitbooks.io/shellbook"
         }
     },
