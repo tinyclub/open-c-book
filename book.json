@@ -5,7 +5,8 @@
     "links": {
         "sidebar": {
             "泰晓科技": "http://www.tinylab.org",
-            "项目首页": "http://www.tinylab.org/project/hello-c-world"
+            "项目首页": "http://www.tinylab.org/project/hello-c-world",
+            "Shell 编程范例": "http://tinylab.gitbooks.io/shellbook"
         }
     },
     "title": "C 语言编程透视"
