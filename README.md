@@ -29,7 +29,7 @@ The license is under ![](http://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png),
 
 ### Donate
 
-<span id="donate"><img src="http://www.tinylab.org/wp-content/uploads/2015/05/tinylab-sponsor-1.68.jpg" width="160"/></span>
+<span id="donate"><img src="pic/tinylab-sponsor-1.68.jpg" width="160"/></span>
 
 ### More...
 
