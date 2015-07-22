@@ -11,42 +11,40 @@
 <span id="toc_14856_6356_1"></span>
 ## 前言
 
-在阅读《高级 Unix 环境编程》的第 14 章时，看到一个“打印不同类型的数据所存放的位置”的例子，它非常清晰地从程序内部反应了“进程的内存映像”，通过结合它与[《Gcc 编译的背后》][1]和[《缓冲区溢出与注入》][2]的相关内容，可以更好地辅助理解相关的内容。
+在阅读《UNIX 环境高级编程 》的第 14 章时，看到一个“打印不同类型的数据所存放的位置”的例子，它非常清晰地从程序内部反应了“进程的内存映像”，通过结合它与[《Gcc 编译的背后》][1]和[《缓冲区溢出与注入分析》][2]的相关内容，可以更好地辅助理解相关的内容。
 
-[1]: 02-chapter2.markdown 
-[2]: 02-chapter5.markdown 
+[1]: 02-chapter2.markdown
+[2]: 02-chapter5.markdown
 
 <span id="toc_14856_6356_2"></span>
 ## 进程内存映像表
 
 首先回顾一下[《缓冲区溢出与注入》][2]中提到的"进程内存映像表"，并把共享内存的大概位置加入该表：
 
-```
-地址                            内核空间
-
-0xC0000000
-             (program flie) 程序名           execve 的第一个参数
-             (environment) 环境变量          execve 的第三个参数，main 的第三个参数
-             (arguments) 参数                execve 的第二个参数，main 的形参
-             (stack) 栈                      自动变量以及每次函数调用时所需保存的信息都
-                  |                          存放在此，包括函数返回地址、调用者的
-                  |                          环境信息等，函数的参数，局部变量都存放在此
-             (shared memory) 共享内存        共享内存的大概位置    
-                 \|/
-                 ...
-             (heap)堆                        主要在这里进行动态存储分配，比如 malloc，new 等。
-
-             .bss (uninitilized data)        没有初始化的数据（全局变量哦）
-             .data (initilized global data)  已经初始化的全局数据（全局变量）
-             .text (Executable Instructions) 通常是可执行指令
-0x08048000
-0x00000000
-```
+|地址       |   内核空间                       | 描述                                             |
+|-----------|----------------------------------|--------------------------------------------------|
+|0xC0000000 |                                  |                                                  |
+|           |  (program flie) 程序名           | execve 的第一个参数                              |
+|           |  (environment) 环境变量          | execve 的第三个参数，main 的第三个参数           |
+|           |  (arguments) 参数                | execve 的第二个参数，main 的形参                 |
+|           |  (stack) 栈                      | 自动变量以及每次函数调用时所需保存的信息都       |
+|           |                                  | 存放在此，包括函数返回地址、调用者的             |
+|           |                                  | 环境信息等，函数的参数，局部变量都存放在此       |
+|           |  (shared memory) 共享内存        | 共享内存的大概位置                               |
+|           |      ...                         |                                                  |
+|           |      ...                         |                                                  |
+|           |  (heap) 堆                       | 主要在这里进行动态存储分配，比如 malloc，new 等。|
+|           |      ...                         |                                                  |
+|           |  .bss (uninitilized data)        | 没有初始化的数据（全局变量哦）                   |
+|           |  .data (initilized global data)  | 已经初始化的全局数据（全局变量）                 |
+|           |  .text (Executable Instructions) | 通常是可执行指令                                 |
+|0x08048000 |                                  |                                                  |
+|0x00000000 |                                  |                                                  |
 
 <span id="toc_14856_6356_3"></span>
 ## 在程序内部打印内存分布信息
 
-为了能够反应上述内存分布情况，这里在《高级 Unix 环境编程》的程序 14-11 的基础上，添加了一个已经初始化的全局变量（存放在已经初始化的数据段内），并打印了它以及 `main` 函数(处在代码正文部分)的位置。
+为了能够反应上述内存分布情况，这里在《UNIX 环境高级编程 》的程序 14-11 的基础上，添加了一个已经初始化的全局变量（存放在已经初始化的数据段内），并打印了它以及 `main` 函数(处在代码正文部分)的位置。
 
 ```
 /**
@@ -75,8 +73,8 @@ int main(void)
     printf("main: the address of the main function is %x\n", main);
     printf("data: data segment is from %x\n", &init_global_variable);
     printf("bss: array[] from %x to %x\n", &array[0], &array[ARRAY_SIZE]);
-    printf("stack: around %x\n", &shmid);    
-    
+    printf("stack: around %x\n", &shmid);   
+   
     /* shmid is a local variable, which is stored in the stack, hence, you
      * can get the address of the stack via it*/
 
@@ -111,7 +109,7 @@ int main(void)
 ```
 $  make showmemory
 cc     showmemory.c   -o showmemory
-$ ./showmemory 
+$ ./showmemory
 main: the address of the main function is 804846c
 data: data segment is from 80498e8
 bss: array[] from 8049920 to 804a8c0
@@ -233,19 +231,19 @@ int main(int argc, char *argv[])
         exit(-1);
     }
 
-    printf("stack:\t <--0x%x--> (address of local variables)\n", &shmid);    
+    printf("stack:\t <--0x%x--> (address of local variables)\n", &shmid);   
     printf("arg:  \t0x%x (address of arguments)\n", argv);
     printf("env:  \t0x%x (address of environment variables)\n", environ);
 
     exit(0);
 }
-``` 
+```
 
 运行结果：
 
 ```
-$ make showmemory 
-$ ./showmemory 
+$ make showmemory
+$ ./showmemory
 ===== memory map =====
 .text:    0x8048440->0x8048754 (_start, code text)
 .data:    0x8049a3c->0x8049a48 (__data_start, initilized data)
@@ -263,10 +261,10 @@ env:      0xbff85bfc (address of environment variables)
 上述程序完整地勾勒出了进程的内存分布的各个重要部分，这样就可以从程序内部获取跟程序相关的所有数据了，一个非常典型的例子是，在程序运行的过程中检查代码正文部分是否被恶意篡改。
 
 如果想更深地理解相关内容，那么可以试着利用 `readelf`，`objdump` 等来分析 ELF 可执行文件格式的结构，并利用 `gdb` 来了解程序运行过程中的内存变化情况。
-   
+
 <span id="toc_14856_6356_6"></span>
 ## 参考资料
 
 - [Gcc 编译的背后（第二部分：汇编和链接）][1]
-- [缓冲区溢出与注入][2]
+- [缓冲区溢出与注入分析][2]
 - 《Unix 环境高级编程》第 14 章，程序 14-11
