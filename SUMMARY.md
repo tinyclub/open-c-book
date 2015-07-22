@@ -8,4 +8,4 @@
 * [进程的内存映像](zh/chapters/02-chapter6.markdown)
 * [进程和进程的基本操作](zh/chapters/02-chapter7.markdown)
 * [把可执行文件“减肥”到 76 字节](zh/chapters/02-chapter8.markdown)
-* [代码测试、调试与优化小结](zh/chapters/02-chapter9.markdown)
+* [代码测试、调试与优化](zh/chapters/02-chapter9.markdown)
