@@ -39,7 +39,7 @@
 |           |  .data (initilized global data)  | 已经初始化的全局数据（全局变量）                 |
 |           |  .text (Executable Instructions) | 通常是可执行指令                                 |
 |0x08048000 |                                  |                                                  |
-|0x00000000 |                                  |                                                  |
+|0x00000000 |                                  | ...                                              |
 
 <span id="toc_14856_6356_3"></span>
 ## 在程序内部打印内存分布信息
