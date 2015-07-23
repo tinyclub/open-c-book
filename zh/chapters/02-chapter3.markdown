@@ -570,8 +570,8 @@ $ ./hello
 <span id="toc_16100_6031_13"></span>
 ## 参考资料
 
-- Linux 启动过程：man boot-scripts
-- Linux 内核启动参数：man bootparam
-- man 5 passwd
-- man shadow
-- 《UNIX环境高级编程》，进程关系一章
+- Linux 启动过程：`man boot-scripts`
+- Linux 内核启动参数：`man bootparam`
+- `man 5 passwd`
+- `man shadow`
+- 《UNIX 环境高级编程》，进程关系一章
