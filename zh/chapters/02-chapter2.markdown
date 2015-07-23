@@ -261,7 +261,7 @@ Section Headers Table(节区头部表，用于链接可重定位文件成可执�
 文件头说明了文件的类型，大小，运行平台，节区数目等。
 
 <span id="toc_27212_14734_16"></span>
-### 三种不同类型ELF文件比较
+### 三种不同类型 ELF 文件比较
 
 先来通过文件头看看不同ELF的类型。为了说明问题，先来几段代码吧。
 
@@ -373,7 +373,7 @@ $ gcc -static -o test test.o -lmyprintf -L./
 <span id="toc_27212_14734_17"></span>
 ### ELF 主体：节区
 
-下面来看看ELF文件的主体内容：节区（Section)。
+下面来看看 ELF 文件的主体内容：节区（Section)。
 
 ELF 文件具有很大的灵活性，它通过文件头组织整个文件的总体结构，通过节区表 (Section Headers Table）和程序头（Program Headers Table 或者叫段表）来分别描述可重定位文件和可执行文件。但不管是哪种类型，它们都需要它们的主体，即各种节区。
 
@@ -1027,15 +1027,15 @@ int main(void)
     - [[1](http://www.x86.org/ftp/manuals/tools/elf.pdf)]
     - [[2](http://www.muppetlabs.com/~breadbox/software/ELF.txt)]
 - TN05.ELF.Format.Summary.pdf
-- http://www.xfocus.net/articles/200105/174.html
-- 关于 GCC 方面的论文，请查看历年的会议论文集
+- [ELF文件格式(中文)](http://www.xfocus.net/articles/200105/174.html)
+- 关于 Gcc 方面的论文，请查看历年的会议论文集
     - [2005](http://www.gccsummit.org/2005/2005-GCC-Summit-Proceedings.pdf)
     - [2006](http://www.gccsummit.org/2006/2006-GCC-Summit-Proceedings.pdf)
 - [The Linux GCC HOW TO](http://www.faqs.org/docs/Linux-HOWTO/GCC-HOWTO.html)
 - [ELF: From The Programmer's Perspective](http://linux.jinr.ru/usoft/WWW/www_debian.org/Documentation/elf/elf.html)
 - [C/C++ 程序编译步骤详解](http://www.xxlinux.com/linux/article/development/soft/20070424/8267.html)
 - [C 语言常见问题集](http://c-faq-chn.sourceforge.net/ccfaq/index.html)
-- [使用BFD操作ELF](http://elfhack.whitecell.org/mydocs/use_bfd.txt)
+- [使用 BFD 操作 ELF](http://elfhack.whitecell.org/mydocs/use_bfd.txt)
 - [bfd document](http://sourceware.org/binutils/docs/bfd/index.html)
 - [UNIX/LINUX 平台可执行文件格式分析](http://blog.chinaunix.net/u/19881/showart_215242.html)
 - [Linux 汇编语言快速上手：4大架构一块学](http://www.tinylab.org/linux-assembly-language-quick-start/)
