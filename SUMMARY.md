@@ -2,7 +2,7 @@
 * [前言](zh/preface/01-chapter1.markdown)
 * [把 Vim 打造成源代码编辑器](zh/chapters/02-chapter1.markdown)
 * [Gcc 编译的背后](zh/chapters/02-chapter2.markdown)
-* [程序执行的那一刹那](zh/chapters/02-chapter3.markdown)
+* [程序执行的一刹那](zh/chapters/02-chapter3.markdown)
 * [动态符号链接的细节](zh/chapters/02-chapter4.markdown)
 * [缓冲区溢出与注入分析](zh/chapters/02-chapter5.markdown)
 * [进程的内存映像](zh/chapters/02-chapter6.markdown)

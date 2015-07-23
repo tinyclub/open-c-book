@@ -5,16 +5,16 @@
 
 # C 语言编程透视
 
-v0.2
+v 0.2
 
-本书与[《深入淺出 Hello World》](http://blog.linux.org.tw/~jserv/archives/001844.html)有着类似的心路历程，旨在以实验的方式去探究 “Hello World” 这样的小程序在开发与执行过程中的微妙变化，一层层揭开 C 语言程序开发过程的神秘面纱，透视背后的秘密，不断享受醍醐灌顶的美妙。
+本书与[《深入淺出 Hello World》](http://blog.linux.org.tw/~jserv/archives/001844.html)有着类似的心路历程，旨在以实验的方式去探究类似 `Hello World` 这样的小程序在开发与执行过程中的微妙变化，一层层揭开 C 语言程序开发过程的神秘面纱，透视背后的秘密，不断享受醍醐灌顶的美妙。
 
 ## 介绍
 
 - 项目首页：<http://www.tinylab.org/project/hello-c-world/>
 - 代码仓库：[https://github.com/tinyclub/open-c-book.git](https://github.com/tinyclub/open-c-book)
 
-更多本书背景和计划请参考：[前言](zh/preface/01-chapter1.markdown)。
+    更多背景和计划请参考：[前言](zh/preface/01-chapter1.markdown)。
 
 ### 安装
 
@@ -33,11 +33,11 @@ v0.2
 ### 编译
 
     $ gitbook build  // 编译成网页
-    $ gitbook pdf    // 编译成pdf
+    $ gitbook pdf    // 编译成 pdf
 
 ### 纠错
 
-如果发现任何错误，请邮件联系 wuzhangjin at gmail dot com 告知我们或者直接修复并提交 Pull Request。
+欢迎大家指出不足，如有任何疑问，请邮件联系 wuzhangjin at gmail dot com 或者直接修复并提交 Pull Request。
 
 ### 版权
 

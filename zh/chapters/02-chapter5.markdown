@@ -83,11 +83,11 @@ int main(void)
 
 `X86` 处理器平台有三个常用寄存器：程序指令指针、程序堆栈指针与程序基指针：
 
-寄存器 名称         注释
------- ------------ --------------------------
-EIP    程序指令指针 通常指向下一条指令的位置
-ESP    程序堆栈指针 通常指向当前堆栈的当前位置
-EBP    程序基指针   通常指向函数使用的堆栈顶端
+|寄存器|名称        |注释                      |
+|------|------------|--------------------------|
+|EIP   |程序指令指针|通常指向下一条指令的位置  |
+|ESP   |程序堆栈指针|通常指向当前堆栈的当前位置|
+|EBP   |程序基指针  |通常指向函数使用的堆栈顶端|
 
 当然，上面都是扩展的寄存器，用于 32 位系统，对应的 16 系统为 `ip`，`sp`，`bp` 。
 
@@ -139,8 +139,8 @@ EBP    程序基指针   通常指向函数使用的堆栈顶端
 第 2 部分比较有趣，而且复杂一点。我们依次来看各个寄存器，首先根据 `eax` 为 4 确定（同样查表）系统调用为 `sys_write`，而查看它的声明（从 `/usr/include/unistd.h`），我们找到了参数依次为文件描述符、字符串指针和字符串长度。
 
 - 第一个参数是 `ebx`，正好是 2，即标准错误输出，默认为终端。
-- 第二个参数是 `ecx`，而 `ecx` 的内容来自 `esi`，`esi` 来自刚弹出栈的值（见第 6 行 `popl %esi;`），而之前刚好有 `call` 指令引起了最近一次压栈操作，入栈的内容刚好是 `call` 指令的下一条指令的地址，即 `.string` 所在行的地址，这样 `ecx` 刚好引用了 `"Hello World\\n"` 字符串的地址。
-- 第三个参数是 `edx`，刚好是 12，即 `"Hello World\\n"` 字符串的长度（包括一个空字符）。这样，`Shellcode.c` 的执行流程就很清楚了，第 4，5，15，16 行指令的巧妙之处也就容易理解了（把 `.string` 存放在 `call` 指令之后，并用 `popl` 指令把 `eip` 弹出当作字符串的入口）。
+- 第二个参数是 `ecx`，而 `ecx` 的内容来自 `esi`，`esi` 来自刚弹出栈的值（见第 6 行 `popl %esi;`），而之前刚好有 `call` 指令引起了最近一次压栈操作，入栈的内容刚好是 `call` 指令的下一条指令的地址，即 `.string` 所在行的地址，这样 `ecx` 刚好引用了 `Hello World\\n` 字符串的地址。
+- 第三个参数是 `edx`，刚好是 12，即 `Hello World\\n` 字符串的长度（包括一个空字符）。这样，`Shellcode.c` 的执行流程就很清楚了，第 4，5，15，16 行指令的巧妙之处也就容易理解了（把 `.string` 存放在 `call` 指令之后，并用 `popl` 指令把 `eip` 弹出当作字符串的入口）。
 
 <span id="toc_14869_27504_6"></span>
 ### 什么是 ELF 文件
@@ -234,7 +234,7 @@ Contents of section .interp:
  8048124 2e3200                               .2.
 ```
 
-补充：如果要删除可执行文件的 `Program Section Table`，可以用[A Whirlwind Tutorial on Creating Really Teensy ELF Executables for Linux](http://www.muppetlabs.com/~breadbox/software/tiny/teensy.html)一文的作者写的[elf kicker](http://www.muppetlabs.com/~breadbox/software/elfkickers.html)工具链中的 `sstrip` 工具。
+补充：如果要删除可执行文件的 `Program Section Table`，可以用 [A Whirlwind Tutorial on Creating Really Teensy ELF Executables for Linux](http://www.muppetlabs.com/~breadbox/software/tiny/teensy.html) 一文的作者写的 [elf kicker](http://www.muppetlabs.com/~breadbox/software/elfkickers.html) 工具链中的 `sstrip` 工具。
 
 <span id="toc_14869_27504_7"></span>
 ### 程序执行基本过程
@@ -302,7 +302,7 @@ Linux 支持很多不同的可执行文件格式，这些不同的格式是如�
 
 [100]: 02-chapter7.markdown
 
-对于内核态的函数调用过程，没有办法通过 `strace`（它只能跟踪到系统调用层）来做的，因此要想跟踪内核中各个系统调用的执行细节，需要用其他工具。比如可以通过给内核打一个[KFT(Kernel Function Tracing)](http://dslab.lzu.edu.cn:8080/members/zhangwei/doc/KFT-HOWTO)的补丁来跟踪内核具体调用了哪些函数。当然，也可以通过 `ctags/cscope/LXR` 等工具分析内核的源代码。
+对于内核态的函数调用过程，没有办法通过 `strace`（它只能跟踪到系统调用层）来做的，因此要想跟踪内核中各个系统调用的执行细节，需要用其他工具。比如可以通过 Ftrace 来跟踪内核具体调用了哪些函数。当然，也可以通过 `ctags/cscope/LXR` 等工具分析内核的源代码。
 
 Linux 允许自己注册我们自己定义的可执行格式，主要接口是 `/procy/sys/fs/binfmt_misc/register`，可以往里头写入特定格式的字符串来实现。该字符串格式如下：
 `:name:type:offset:string:mask:interpreter:`
