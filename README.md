@@ -1,6 +1,7 @@
-> 本书-来源：[开源书籍：C 语言编程透视](http://www.tinylab.org/project/hello-c-world/) (by [泰晓科技](http://tinylab.org))<br>
-> 报名/参与：*Star/fork* [GitHub 仓库](https://github.com/tinyclub/open-c-book); *关注/私信* [@泰晓科技](http://weibo.com/tinylaborg)  <br>
-> 赞助-我们：[赞助 1.68￥](#donate)，[更多原创开源书籍](#more)期待您的支持 ^o^ <br>
+> 本书来源：[开源书籍：C 语言编程透视](http://www.tinylab.org/project/hello-c-world/) (by [泰晓科技](http://tinylab.org))<br>
+> 报名参与：*Star/fork* [GitHub 仓库](https://github.com/tinyclub/open-c-book) <br>
+> 关注我们：[扫描二维码](#follow) 关注 [@泰晓科技](http://weibo.com/tinylaborg) 微博<br>
+> 赞助我们：[赞助 1.68￥](#donate)，[更多原创开源书籍](#more)期待您的支持 ^o^ <br>
 
 
 # C 语言编程透视
@@ -44,6 +45,10 @@ v 0.2
 本书采用 ![CC BY NC ND 4.0](http://i.creativecommons.org/l/by-nc-nd/4.0/88x31.png) 协议发布，详细版权信息请参考 [CC BY NC ND 4.0](http://creativecommons.org/licenses/by-nc-nd/4.0/)。
 
 <hr>
+
+### 关注我们
+
+<span id="follow"><img src="pic/tinylab-logo-sina.jpg" width="150"/></span>
 
 ### 赞助我们
 
