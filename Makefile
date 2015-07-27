@@ -1,9 +1,14 @@
 all:
 	gitbook build
+
+pdf:
 	gitbook pdf
 
-read:
+read-pdf:
 	evince book.pdf
+
+read-html:
+	chromium-browser _book/index.html
 
 clean:
 	@rm -rf _book
