@@ -305,11 +305,12 @@ $ time ./hello
 
 用普通的工具没有办法删除节区表，但是参考资料[\[1\]][1]的作者已经写了这样一个工具。你可以从[这里](http://www.muppetlabs.com/~breadbox/software/elfkickers.html)下载到那个工具，它是该作者写的一序列工具 `ELFkickers` 中的一个。
 
-下载并编译：
+下载并编译（**注**：1.0 之前的版本才支持 32 位和正常编译，新版本在代码中明确限定了数据结构为 `Elf64`）：
 
 ```
 $ git clone https://github.com/BR903/ELFkickers
 $ cd ELFkickers/sstrip/
+$ git checkout f0622afa    # 检出 1.0 版
 $ make
 ```
 
