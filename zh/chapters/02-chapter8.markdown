@@ -314,7 +314,7 @@ $ git checkout f0622afa    # 检出 1.0 版
 $ make
 ```
 
-然后复制到 `/usr/bini` 下，下面用它来删除节区表。
+然后复制到 `/usr/bin` 下，下面用它来删除节区表。
 
 ```
 $ sstrip hello      #删除ELF可执行文件的节区表
