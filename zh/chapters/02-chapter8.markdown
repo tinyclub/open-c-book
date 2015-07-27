@@ -220,7 +220,7 @@ clean:
 $ make   #编译
 $ ./hello   #这个也是可以正常工作的
 Hello World
-$ wc -c hello   #但是大小减少了4382个字节，减少了将近70%
+$ wc -c hello   #但是大小减少了4382个字节，减少了将近 70%
 2060 hello
 $ echo "6442-2060" | bc
 4382
@@ -228,24 +228,7 @@ $ echo "(6442-2060)/6442" | bc -l
 .68022353306426575597
 ```
 
-对于一个比较小的程序，能够减少将近70%“没用的”代码。至于一个大一点的程序（这个代码是资料[\[1\]][1]的作者写的一个小工具，我们后面会使用它）再看看效果。
-
-```
-$ gcc -o sstrip sstrip.c   #默认编译的情况
-$ wc -c sstrip
-10912 sstrip
-$ sed -i -e "s/hello/sstrip/g" Makefile  #把Makefile中的hello替换成sstrip
-$ make clean      #清除默认编译的sstrip
-$ make            #用我们的Makefile编译
-$ wc -c sstrip
-6589 sstrip
-$ echo "10912-6589" | bc -l   #再比较大小，减少的代码还是4323个字节，减幅40%
-4323
-$ echo "(10912-6589)/10912" | bc -l
-.39616935483870967741
-```
-
-通过这两个简单的实验，我们发现，能够减少掉 4000 个字节左右，相当于 4k 左右。
+对于一个比较小的程序，能够减少将近 70% “没用的”代码。
 
 <span id="toc_3928_6176_7"></span>
 ### 删除对程序运行没有影响的节区
@@ -253,7 +236,6 @@ $ echo "(10912-6589)/10912" | bc -l
 使用上述 `Makefile` 来编译程序，不链接那些对程序运行没有多大影响的文件，实际上也相当于删除了一些“没用”的节区，可以通过下列演示看出这个实质。
 
 ```
-$ sed -i -e "s/sstrip/hello/g" Makefile  #先看看用Makefile编译的结果，替换回hello
 $ make clean
 $ make
 $ readelf -l hello | grep "0[0-9]\ \ "
@@ -321,7 +303,17 @@ $ time ./hello
 <span id="toc_3928_6176_8"></span>
 ### 删除可执行文件的节区表
 
-用普通的工具没有办法删除节区表，但是参考资料[\[1\]][1]的作者已经写了这样一个工具。你可以从[这里](http://www.muppetlabs.com/~breadbox/software/elfkickers.html)下载到那个工具，即我们上面作为一个演示例子的 `sstrip`，它是该作者写的一序列工具 `ELFkickers` 中的一个。下载以后，编译，并复制到 `/usr/bin` 下，下面用它来删除节区表。
+用普通的工具没有办法删除节区表，但是参考资料[\[1\]][1]的作者已经写了这样一个工具。你可以从[这里](http://www.muppetlabs.com/~breadbox/software/elfkickers.html)下载到那个工具，它是该作者写的一序列工具 `ELFkickers` 中的一个。
+
+下载并编译：
+
+```
+$ git clone https://github.com/BR903/ELFkickers
+$ cd ELFkickers/sstrip/
+$ make
+```
+
+然后复制到 `/usr/bini` 下，下面用它来删除节区表。
 
 ```
 $ sstrip hello      #删除ELF可执行文件的节区表
