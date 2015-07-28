@@ -7,5 +7,5 @@
 * [缓冲区溢出与注入分析](zh/chapters/02-chapter5.markdown)
 * [进程的内存映像](zh/chapters/02-chapter6.markdown)
 * [进程和进程的基本操作](zh/chapters/02-chapter7.markdown)
-* [把可执行文件减到 76 字节](zh/chapters/02-chapter8.markdown)
+* [打造52字节ELF文件(可打印Hello World)](zh/chapters/02-chapter8.markdown)
 * [代码测试、调试与优化](zh/chapters/02-chapter9.markdown)
