@@ -1416,6 +1416,52 @@ ret=${ret}"\x34\x00\x20\x00\x01"
 echo -ne $ret > ret.elf
 ```
 
+又或者是直接参照资料 [\[1\]][1] 写一个 `tiny.asm` 就行了，因为资料一有完整的代码，这里只给一下 `hello` 的 `nasm` 版本吧，后续有时间也可以直接写一个 `AT&T` 的完整 binary 版本：
+
+```
+; hello.asm
+
+  BITS 32
+
+                org     0x00010000
+
+                db      0x7F, "ELF"             ; e_ident
+                dd      1                                       ; p_type
+                dd      0                                       ; p_offset
+                dd      $$                                      ; p_vaddr
+                dw      2                       ; e_type        ; p_paddr
+                dw      3                       ; e_machine
+                dd      _start                  ; e_version     ; p_filesz
+                dd      _start                  ; e_entry       ; p_memsz
+                dd      4                       ; e_phoff       ; p_flags
+  _start:
+                pop     ecx     ; argc          ; e_shoff       ; p_align
+                pop     ecx     ; argv[0]
+                mov     dl, 5   ; str len       ; e_flags
+                mov     al, 4   ; sys_write(fd, addr, len) : ebx, ecx, edx
+                jmp     _next   ; jump to next part of the code
+                dw      0x34                      ; e_ehsize
+                dw      0x20                      ; e_phentsize
+                dw      1                         ; e_phnum
+  _next:        int     0x80    ; syscall         ; e_shentsize
+                mov     al, 1   ; eax=1,sys_exit  ; e_shnum
+                int     0x80    ; syscall         ; e_shstrndx
+
+  filesize      equ     $ - $$
+```
+
+编译和用法如下：
+
+```
+$ ./nasm -f bin -o hello hello.asm a.
+$ chmod a+x hello
+$ export PATH=./:$PATH
+$ hello
+hello
+$ wc -c hello
+52
+```
+
 或许还可以进一步？待续。。。
 
 <span id="toc_3928_6176_23"></span>
