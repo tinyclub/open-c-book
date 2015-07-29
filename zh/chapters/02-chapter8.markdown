@@ -1,4 +1,4 @@
-# 打造 52 字节 ELF 文件（可打印 Hello World）
+# 打造史上最小可执行 ELF 文件（45 字节，可打印字符串）
 
 -    [前言](#toc_3928_6176_1)
 -    [可执行文件格式的选取](#toc_3928_6176_2)
@@ -22,8 +22,9 @@
     -    [把程序头移入文件头](#toc_3928_6176_20)
     -    [在非连续的空间插入代码](#toc_3928_6176_21)
     -    [把程序头完全合入文件头](#toc_3928_6176_22)
--    [小结](#toc_3928_6176_23)
--    [参考资料](#toc_3928_6176_24)
+-    [代码精简之道](#toc_3928_6176_23)
+-    [小结](#toc_3928_6176_24)
+-    [参考资料](#toc_3928_6176_25)
 
 
 <span id="toc_3928_6176_1"></span>
@@ -984,7 +985,7 @@ $ hexdump -C hello
 
 例如，如果要利用后面的 `0xff` 的空间，可以把第 14，15 位置的 `cd 80` 指令替换为一条跳转指令，比如跳转到第 20 个字节的位置，从跳转指令之后的 16 到 20 刚好 4 个字节。
 
-然后可以参考 `X86` 的指令编码手册（也可以写成汇编生成可执行文件后用 `hexdump` 查看），可以把 `jmp` 指令编码为： `0xeb 0x04` 。
+然后可以参考 [X86 指令编码表][15]（也可以写成汇编生成可执行文件后用 `hexdump` 查看），可以把 `jmp` 指令编码为： `0xeb 0x04` 。
 
 ```
 $ echo -ne "\xeb\x04" | dd of=hello bs=1 count=2 seek=14 conv=notrunc
@@ -1564,9 +1565,171 @@ $ wc -c hello
 
 **注**：编译时务必要加 `--oformat=binary` 参数，以便直接跟源文件构建一个二进制的 `Elf` 文件，否则会被 `ld` 默认编译，自动填充其他内容。
 
-或许还可以进一步？待续。。。
-
 <span id="toc_3928_6176_23"></span>
+## 代码精简之道
+
+经过上述努力，我们已经完全把程序头和代码都融入了 52 字节的 `Elf` 文件头，还可以再进一步吗？
+
+基于资料一，如果再要努力，只能设法把 `Elf` 末尾的 7 个 0 字节删除，但是由于代码已经把 `Elf` 末尾的 7 字节 0 字符都填满了，所以要想在这一块努力，只能继续压缩代码。
+
+继续研究下代码先：
+
+```
+.global _start
+_start:
+        popl %ecx	# argc
+        popl %ecx	# argv[0]
+        movb $5, %dl	# 设置字符串长度
+        movb $4, %al	# eax = 4, 设置系统调用号, sys_write(fd, addr, len) : ebx, ecx, edx
+	int $0x80
+        movb $1, %al
+	int $0x80
+```
+
+查看对应的编码：
+
+```
+$ as --32 -o hello.o hello.s
+$ ld -melf_i386 -o hello hello.o --oformat=binary
+$ hexdump -C hello
+00000000  59 59 b2 05 b0 04 cd 80  b0 01 cd 80              |YY..........|
+0000000c
+```
+
+每条指令对应的编码映射如下：
+
+  指令         |  编码     | 说明
+  -------------|-----------|-----------
+  popl %ecx    |  59  	   | argc
+  popl %ecx    |  59	   | argv[0]
+  movb $5, %dl |  b2 05	   | 设置字符串长度
+  movb $4, %al |  b0 04	   | eax = 4, 设置系统调用号, sys_write(fd, addr, len) : ebx, ecx, edx
+  int $0x80    |  cd 80    | 触发系统调用
+  movb $1, %al |  b0 01    | eax = 1, sys_exit
+  int $0x80    |  cd 80    | 触发系统调用
+
+可以观察到：
+
+* `popl` 的指令编码最简洁。
+* `int $0x80` 重复了两次，而且每条都占用了 2 字节
+* `movb` 每条都占用了 2 字节
+* `eax` 有两次赋值，每次占用了 2 字节
+* `popl %ecx` 取出的 argc 并未使用
+
+根据之前通过参数传递字符串的想法，咱们是否可以考虑通过参数来设置变量呢？
+
+理论上，传入多个参数，通过 `pop` 弹出来赋予 `eax`, `ecx` 即可，但是实际上，由于从参数栈里头 `pop` 出来的参数是参数的地址，并不是参数本身，所以该方法行不通。
+
+不过由于第一个参数取出的是数字，并且是参数个数，而且目前的那条 `popl %ecx` 取出的 `argc` 并没有使用，那么刚好可以用来设置 `eax`，替换后如下：
+
+```
+.global _start
+_start:
+        popl %eax    # eax = 4, 设置系统调用号, sys_write(fd, addr, len) : ebx, ecx, edx
+        popl %ecx    # argv[0], 字符串
+        movb $5, %dl # 设置字符串长度
+	int $0x80
+        movb $1, %al # eax = 1, sys_exit
+	int $0x80
+```
+
+这里需要传入 4 个参数，即让栈弹出的第一个值，也就是参数个数赋予 `eax`，也就是：`hello 5 4 1`。
+
+难道我们只能把该代码优化到 10 个字节？
+
+巧合地是，当偶然改成这样的情况下，该代码还能正常返回。
+
+```
+.global _start
+_start:
+        popl %eax	# eax = 4, 设置系统调用号, sys_write(fd, addr, len) : ebx, ecx, edx
+        popl %ecx	# argv[0], 字符串
+        movb $5, %dl	# 设置字符串长度
+	int $0x80
+        loop _start     # 触发系统退出
+```
+
+**注**：上面我们使用了 `loop` 指令而不是 `jmp` 指令，因为 `jmp _start` 产生的代码更长，而 `loop _start` 指令只有两个字节。
+
+这里相当于删除了 `movb $1, %al`，最后我们获得了 8 个字节。但是这里为什么能够工作呢？
+
+经过分析 `arch/x86/ia32/ia32entry.S`，我们发现当系统调用号无效时（超过系统调用入口个数），内核为了健壮考虑，必须要处理这类异常，并通过 `ia32_badsys` 让系统调用正常返回。
+
+这个可以这样验证：
+
+```
+.global _start
+_start:
+        popl %eax    # argc, eax = 4, 设置系统调用号, sys_write(fd, addr, len) : ebx, ecx, edx
+        popl %ecx    # argv[0], 文件名
+        mov $5, %dl  # argv[1]，字符串长度
+        int $0x80
+        mov $0xffffffda, %eax  # 设置一个非法调用号用于退出
+        int $0x80
+```
+
+那最后的结果是，我们产生了一个可以正常打印字符串，大小只有 45 字节的 `Elf` 文件，最终的结果如下：
+
+```
+# hello.s
+#
+# $ as --32 -o hello.o hello.s
+# $ ld -melf_i386 --oformat=binary -o hello hello.o
+# $ export PATH=./:$PATH
+# $ hello 0 0 0
+# hello
+#
+
+        .file "hello.s"
+        .global _start, _load
+        .equ   LOAD_ADDR, 0x00010000   # Page aligned load addr, here 64k
+        .equ   E_ENTRY, LOAD_ADDR + (_start - _load)
+        .equ   P_MEM_SZ, E_ENTRY
+        .equ   P_FILE_SZ, P_MEM_SZ
+
+_load:
+        .byte  0x7F
+        .ascii "ELF"              # e_ident, Magic Number
+        .long  1                                      # p_type, loadable seg
+        .long  0                                      # p_offset
+        .long  LOAD_ADDR                              # p_vaddr
+        .word  2                  # e_type, exec  # p_paddr
+        .word  3                  # e_machine, Intel 386 target
+        .long  P_FILE_SZ          # e_version     # p_filesz
+        .long  E_ENTRY            # e_entry       # p_memsz
+        .long  4                  # e_phoff       # p_flags, read(exec)
+        .text
+_start:
+        popl   %eax    # argc     # e_shoff       # p_align
+                       # 4 args, eax = 4, sys_write(fd, addr, len) : ebx, ecx, edx
+                       # set 2nd eax = random addr to trigger bad syscall for exit
+        popl   %ecx    # argv[0]
+        mov    $5, %dl # str len  # e_flags
+        int    $0x80
+        loop   _start  # loop to popup a random addr as a bad syscall number 
+        .word  0x34               # e_ehsize = 52
+        .word  0x20               # e_phentsize = 32
+        .byte  1                  # e_phnum = 1, remove trailing 7 bytes with 0 value
+                                  # e_shentsize
+                                  # e_shnum
+                                  # e_shstrndx
+```
+
+效果如下：
+
+```
+$ as --32 -o hello.o hello.s
+$ ld -melf_i386 -o hello hello.o --oformat=binary
+$ export PATH=./:$PATH
+$ hello 0 0 0
+hello
+$ wc -c hello
+45 hello
+```
+
+到这里，我们获得了史上最小的可以打印字符串的 `Elf` 文件，是的，只有 45 个字节。
+
+<span id="toc_3928_6176_24"></span>
 ## 小结
 
 到这里，关于可执行文件的讨论暂且结束，最后来一段小小的总结，那就是我们设法去减少可执行文件大小的意义？
@@ -1575,7 +1738,7 @@ $ wc -c hello
 
 或许，你还会发现更多有趣的意义，欢迎给我发送邮件，一起讨论。
 
-<span id="toc_3928_6176_24"></span>
+<span id="toc_3928_6176_25"></span>
 ## 参考资料
 
 - [A Whirlwind Tutorial on Creating Really Teensy ELF Executables for Linux][1]
@@ -1589,6 +1752,7 @@ $ wc -c hello
 - [Linux 汇编语言开发指南][9]
 - [Library Optimizer][10]
 - ELF file format and ABI：[\[1\]][11]，[\[2\]][12]，[\[3\]][13]，[\[4\]][14]
+- [i386 指令编码表][15]
 
  [1]: http://www.muppetlabs.com/~breadbox/software/tiny/teensy.html
  [2]: http://blog.chinaunix.net/u/19881/showart_215242.html
@@ -1604,3 +1768,4 @@ $ wc -c hello
  [12]: http://www.muppetlabs.com/~breadbox/software/ELF.txt
  [13]: http://162.105.203.48/web/gaikuang/submission/TN05.ELF.Format.Summary.pdf
  [14]: http://www.xfocus.net/articles/200105/174.html
+ [15]: http://sparksandflames.com/files/x86InstructionChart.html
