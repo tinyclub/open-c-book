@@ -7,6 +7,8 @@ pdf:
 read-pdf:
 	evince book.pdf
 
+read: read-html
+
 read-html:
 	chromium-browser _book/index.html
 
