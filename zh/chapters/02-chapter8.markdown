@@ -67,8 +67,8 @@ $ cat hello.c   #典型的hello, world程序
 
 int main(void)
 {
-        printf("hello, world!\n");
-        return 0;
+	printf("hello, world!\n");
+	return 0;
 }
 $ gcc -c hello.c   #编译，产生可重定向的目标代码
 $ readelf -h hello.o | grep Type   #通过readelf查看文件头部找出该类型
@@ -253,7 +253,7 @@ $ readelf -l hello | grep "0[0-9]\ \ "
    00
    01     .interp
    02     .interp .note.ABI-tag .hash .gnu.hash .dynsym .dynstr .gnu.version .gnu.version_r
-          .rel.dyn .rel.plt .init .plt .text .fini .rodata .eh_frame
+	  .rel.dyn .rel.plt .init .plt .text .fini .rodata .eh_frame
    03     .ctors .dtors .jcr .dynamic .got .got.plt .data .bss
    04     .dynamic
    05     .note.ABI-tag
@@ -359,33 +359,33 @@ $ cat hello.c  #这个是使用_exit和printf函数的版本
 
 int main()
 {
-        printf("Hello World\n");
-        _exit(0);
+	printf("Hello World\n");
+	_exit(0);
 }
 $ gcc -S hello.c    #生成汇编
 $ cat hello.s       #这里是汇编代码
-        .file   "hello.c"
-        .section        .rodata
+	.file   "hello.c"
+	.section        .rodata
 .LC0:
-        .string "Hello World"
-        .text
+	.string "Hello World"
+	.text
 .globl main
-        .type   main, @function
+	.type   main, @function
 main:
-        leal    4(%esp), %ecx
-        andl    $-16, %esp
-        pushl   -4(%ecx)
-        pushl   %ebp
-        movl    %esp, %ebp
-        pushl   %ecx
-        subl    $4, %esp
-        movl    $.LC0, (%esp)
-        call    puts
-        movl    $0, (%esp)
-        call    _exit
-        .size   main, .-main
-        .ident  "GCC: (GNU) 4.1.3 20070929 (prerelease) (Ubuntu 4.1.2-16ubuntu2)"
-        .section        .note.GNU-stack,"",@progbits
+	leal    4(%esp), %ecx
+	andl    $-16, %esp
+	pushl   -4(%ecx)
+	pushl   %ebp
+	movl    %esp, %ebp
+	pushl   %ecx
+	subl    $4, %esp
+	movl    $.LC0, (%esp)
+	call    puts
+	movl    $0, (%esp)
+	call    _exit
+	.size   main, .-main
+	.ident  "GCC: (GNU) 4.1.3 20070929 (prerelease) (Ubuntu 4.1.2-16ubuntu2)"
+	.section        .note.GNU-stack,"",@progbits
 $ gcc -o hello hello.s   #看看默认产生的代码大小
 $ wc -c hello
 6523 hello
@@ -401,19 +401,19 @@ $ wc -c hello
 	.string "Hello World"
 	.text
 .globl main
-        .type   main, @function
+	.type   main, @function
 main:
-        leal    4(%esp), %ecx
-        andl    $-16, %esp
-        pushl   -4(%ecx)
-        pushl   %ebp
-        movl    %esp, %ebp
-        pushl   %ecx
-        subl    $4, %esp
-        movl    $.LC0, (%esp)
-        call    puts
-        movl    $0, (%esp)
-        call    _exit
+	leal    4(%esp), %ecx
+	andl    $-16, %esp
+	pushl   -4(%ecx)
+	pushl   %ebp
+	movl    %esp, %ebp
+	pushl   %ecx
+	subl    $4, %esp
+	movl    $.LC0, (%esp)
+	call    puts
+	movl    $0, (%esp)
+	call    _exit
 ```
 
 再编译看看，
@@ -467,8 +467,8 @@ Hello World
 
 ```
 .LC0:
-        .string "Hello World\xa\x0"
-        .text
+	.string "Hello World\xa\x0"
+	.text
 .global _start
 _start:
 	xorl   %eax, %eax
@@ -526,28 +526,28 @@ $ echo "676-123" | bc   #相对于之前，已经只需要123个字节了，又�
 .globl _start
 
 _start:
-        popl    %ecx            # argc
+	popl    %ecx            # argc
 vnext:
-        popl    %ecx            # argv
-        test    %ecx, %ecx      # 空指针表明结束
-        jz      exit
-        movl    %ecx, %ebx
-        xorl    %edx, %edx
+	popl    %ecx            # argv
+	test    %ecx, %ecx      # 空指针表明结束
+	jz      exit
+	movl    %ecx, %ebx
+	xorl    %edx, %edx
 strlen:
-        movb    (%ebx), %al
-        inc     %edx
-        inc     %ebx
-        test    %al, %al
-        jnz     strlen
-        movb    $10, -1(%ebx)
-        movl    $4, %eax        # 系统调用号(sys_write)
-        movl    $1, %ebx        # 文件描述符(stdout)
-        int     $0x80
-        jmp     vnext
+	movb    (%ebx), %al
+	inc     %edx
+	inc     %ebx
+	test    %al, %al
+	jnz     strlen
+	movb    $10, -1(%ebx)
+	movl    $4, %eax        # 系统调用号(sys_write)
+	movl    $1, %ebx        # 文件描述符(stdout)
+	int     $0x80
+	jmp     vnext
 exit:
-        movl    $1,%eax         # 系统调用号(sys_exit)
-        xorl    %ebx, %ebx      # 退出代码
-        int     $0x80
+	movl    $1,%eax         # 系统调用号(sys_exit)
+	xorl    %ebx, %ebx      # 退出代码
+	int     $0x80
 	ret
 ```
 
@@ -569,30 +569,30 @@ $ wc -c args           #处理以后只剩下130字节
 ```
 .global _start
 _start:
-        popl %ecx        #弹出argc
+	popl %ecx        #弹出argc
 vnext:
-        popl %ecx        #弹出argv[0]的地址
-        test %ecx, %ecx  #空指针表明结束
-        jz exit
-        movl %ecx, %ebx  #复制字符串地址到ebx寄存器
-        xorl %edx, %edx  #把字符串长度清零
+	popl %ecx        #弹出argv[0]的地址
+	test %ecx, %ecx  #空指针表明结束
+	jz exit
+	movl %ecx, %ebx  #复制字符串地址到ebx寄存器
+	xorl %edx, %edx  #把字符串长度清零
 strlen:                         #求输入字符串的长度
-        movb (%ebx), %al        #复制字符到al，以便判断是否为字符串结束符\0
-        inc %edx                #edx存放每个当前字符串的长度
-        inc %ebx                #ebx存放每个当前字符的地址
-        test %al, %al           #判断字符串是否结束，即是否遇到\0
-        jnz strlen
-        movb $10, -1(%ebx)      #在字符串末尾插入一个换行符\0xa
-        xorl %eax, %eax
-        movb $4, %al            #eax = 4, sys_write(fd, addr, len)
-        xorl %ebx, %ebx
-        incl %ebx               #ebx = 1, standard output
-        int $0x80
-        jmp vnext
+	movb (%ebx), %al        #复制字符到al，以便判断是否为字符串结束符\0
+	inc %edx                #edx存放每个当前字符串的长度
+	inc %ebx                #ebx存放每个当前字符的地址
+	test %al, %al           #判断字符串是否结束，即是否遇到\0
+	jnz strlen
+	movb $10, -1(%ebx)      #在字符串末尾插入一个换行符\0xa
+	xorl %eax, %eax
+	movb $4, %al            #eax = 4, sys_write(fd, addr, len)
+	xorl %ebx, %ebx
+	incl %ebx               #ebx = 1, standard output
+	int $0x80
+	jmp vnext
 exit:
-        xorl %eax, %eax
-        movl %eax, %ebx                 #ebx = 0
-        incl %eax               #eax = 1, sys_exit
+	xorl %eax, %eax
+	movl %eax, %ebx                 #ebx = 0
+	incl %eax               #eax = 1, sys_exit
 	int $0x80
 ```
 
@@ -611,29 +611,29 @@ $ wc -c hello
 .global _start
 _start:
 	popl %ecx
-        popl %ecx        #弹出argc[0]的地址
-        popl %ecx        #弹出argv[1]的地址
-        test %ecx, %ecx
-        jz exit
-        movl %ecx, %ebx
-        xorl %edx, %edx
+	popl %ecx        #弹出argc[0]的地址
+	popl %ecx        #弹出argv[1]的地址
+	test %ecx, %ecx
+	jz exit
+	movl %ecx, %ebx
+	xorl %edx, %edx
 strlen:
-        movb (%ebx), %al
-        inc %edx
-        inc %ebx
-        test %al, %al
-        jnz strlen
-        movb $10, -1(%ebx)
-        xorl %eax, %eax
-        movb $4, %al
-        xorl %ebx, %ebx
-        incl %ebx
-        int $0x80
+	movb (%ebx), %al
+	inc %edx
+	inc %ebx
+	test %al, %al
+	jnz strlen
+	movb $10, -1(%ebx)
+	xorl %eax, %eax
+	movb $4, %al
+	xorl %ebx, %ebx
+	incl %ebx
+	int $0x80
 exit:
-        xorl %eax, %eax
-        movl %eax, %ebx
-        incl %eax
-        int $0x80
+	xorl %eax, %eax
+	movl %eax, %ebx
+	incl %eax
+	int $0x80
 ```
 
 现在刚好 123 字节，和原来那个代码大小一样，不过仔细分析，还是有减少代码的余地：因为在这个代码中，用了一段额外的代码计算字符串的长度，实际上如果仅仅需要打印 `Hello World`，那么字符串的长度是固定的，即 12 。所以这段代码可去掉，与此同时测试字符串是否为空也就没有必要（不过可能影响代码健壮性！），当然，为了能够在打印字符串后就换行，在串的末尾需要加一个回车（`$10`）并且设置字符串的长度为 `12+1`，即 13，
@@ -641,21 +641,21 @@ exit:
 ```
 .global _start
 _start:
-        popl %ecx
-        popl %ecx
-        popl %ecx
-        movb $10,12(%ecx) #在Hello World的结尾加一个换行符
-        xorl %edx, %edx
-        movb $13, %dl
-        xorl %eax, %eax
-        movb $4, %al
-        xorl %ebx, %ebx
-        incl %ebx
-        int $0x80
-        xorl %eax, %eax
-        movl %eax, %ebx
-        incl %eax
-        int $0x80
+	popl %ecx
+	popl %ecx
+	popl %ecx
+	movb $10,12(%ecx) #在Hello World的结尾加一个换行符
+	xorl %edx, %edx
+	movb $13, %dl
+	xorl %eax, %eax
+	movb $4, %al
+	xorl %ebx, %ebx
+	incl %ebx
+	int $0x80
+	xorl %eax, %eax
+	movl %eax, %ebx
+	incl %eax
+	int $0x80
 ```
 
 再看看效果，
@@ -682,19 +682,19 @@ $ wc -c hello
 ```
 .global _start
 _start:
-        popl %ecx
-        popl %ecx
-        popl %ecx
-        movb $10,12(%ecx)
-        xorl %edx, %edx
-        movb $13, %dl
-        xorl %eax, %eax
-        movb $4, %al
-        xorl %ebx, %ebx
-        int $0x80
-        xorl %eax, %eax
-        incl %eax
-        int $0x80
+	popl %ecx
+	popl %ecx
+	popl %ecx
+	movb $10,12(%ecx)
+	xorl %edx, %edx
+	movb $13, %dl
+	xorl %eax, %eax
+	movb $4, %al
+	xorl %ebx, %ebx
+	int $0x80
+	xorl %eax, %eax
+	incl %eax
+	int $0x80
 ```
 
 看看效果，
@@ -725,18 +725,18 @@ $  echo "108-52-32" | bc
 ```
 .global _start
 _start:
-        popl %ecx
-        popl %ecx
-        movb $10,12(%ecx)
-        xorl %edx, %edx
-        movb $13, %dl
-        xorl %eax, %eax
-        movb $4, %al
-        xorl %ebx, %ebx
-        int $0x80
-        xorl %eax, %eax
-        incl %eax
-        int $0x80
+	popl %ecx
+	popl %ecx
+	movb $10,12(%ecx)
+	xorl %edx, %edx
+	movb $13, %dl
+	xorl %eax, %eax
+	movb $4, %al
+	xorl %ebx, %ebx
+	int $0x80
+	xorl %eax, %eax
+	incl %eax
+	int $0x80
 ```
 
 看看效果，
@@ -763,12 +763,12 @@ Hello World
 ```
 .global _start
 _start:
-        popl %ecx	# argc
-        popl %ecx	# argv[0]
-        movb $5, %dl	# 设置字符串长度
-        movb $4, %al	# eax = 4, 设置系统调用号, sys_write(fd, addr, len) : ebx, ecx, edx
+	popl %ecx	# argc
+	popl %ecx	# argv[0]
+	movb $5, %dl	# 设置字符串长度
+	movb $4, %al	# eax = 4, 设置系统调用号, sys_write(fd, addr, len) : ebx, ecx, edx
 	int $0x80
-        movb $1, %al
+	movb $1, %al
 	int $0x80
 ```
 
@@ -1208,9 +1208,9 @@ p_filesz = 54 00 01 00
 
 ```
 $ echo -ne "\x01\x00\x00\x00\x00\x00\x00\x00" \
-           "\x00\x00\x01\x00\x02\x00\x03\x00" \
-           "\x54\x00\x01\x00\x54\x00\x01\x00\x04" |\
-           tr -d ' ' |\
+	   "\x00\x00\x01\x00\x02\x00\x03\x00" \
+	   "\x54\x00\x01\x00\x54\x00\x01\x00\x04" |\
+	   tr -d ' ' |\
     dd of=hello bs=1 count=25 seek=4 conv=notrunc
 ```
 
@@ -1340,10 +1340,10 @@ $ wc -c hello
 ```
 .global _start
 _start:
-        mov $42, %bl   # 设置返回值为 42
-        xor %eax, %eax # eax = 0
-        inc %eax       # eax = eax+1, 设置系统调用号, sys_exit()
-        int $0x80
+	mov $42, %bl   # 设置返回值为 42
+	xor %eax, %eax # eax = 0
+	inc %eax       # eax = eax+1, 设置系统调用号, sys_exit()
+	int $0x80
 ```
 
 保存为 ret.s，编译和执行效果如下：
@@ -1424,29 +1424,29 @@ echo -ne $ret > ret.elf
 
   BITS 32
 
-                org     0x00010000
+	        org     0x00010000
 
-                db      0x7F, "ELF"             ; e_ident
-                dd      1                                       ; p_type
-                dd      0                                       ; p_offset
-                dd      $$                                      ; p_vaddr
-                dw      2                       ; e_type        ; p_paddr
-                dw      3                       ; e_machine
-                dd      _start                  ; e_version     ; p_filesz
-                dd      _start                  ; e_entry       ; p_memsz
-                dd      4                       ; e_phoff       ; p_flags
+	        db      0x7F, "ELF"             ; e_ident
+	        dd      1                                       ; p_type
+	        dd      0                                       ; p_offset
+	        dd      $$                                      ; p_vaddr
+	        dw      2                       ; e_type        ; p_paddr
+	        dw      3                       ; e_machine
+	        dd      _start                  ; e_version     ; p_filesz
+	        dd      _start                  ; e_entry       ; p_memsz
+	        dd      4                       ; e_phoff       ; p_flags
   _start:
-                mov     bl, 42                  ; e_shoff       ; p_align
-                xor     eax, eax
-                inc     eax                     ; e_flags
-                int     0x80
-                db      0
-                dw      0x34                    ; e_ehsize
-                dw      0x20                    ; e_phentsize
-                db      1                       ; e_phnum
-                                                ; e_shentsize
-                                                ; e_shnum
-                                                ; e_shstrndx
+	        mov     bl, 42                  ; e_shoff       ; p_align
+	        xor     eax, eax
+	        inc     eax                     ; e_flags
+	        int     0x80
+	        db      0
+	        dw      0x34                    ; e_ehsize
+	        dw      0x20                    ; e_phentsize
+	        db      1                       ; e_phnum
+	                                        ; e_shentsize
+	                                        ; e_shnum
+	                                        ; e_shstrndx
 
   filesize      equ     $ - $$
 ```
@@ -1469,29 +1469,29 @@ $ wc -c ret
 
   BITS 32
 
-                org     0x00010000
+	        org     0x00010000
 
-                db      0x7F, "ELF"             ; e_ident
-                dd      1                                       ; p_type
-                dd      0                                       ; p_offset
-                dd      $$                                      ; p_vaddr
-                dw      2                       ; e_type        ; p_paddr
-                dw      3                       ; e_machine
-                dd      _start                  ; e_version     ; p_filesz
-                dd      _start                  ; e_entry       ; p_memsz
-                dd      4                       ; e_phoff       ; p_flags
+	        db      0x7F, "ELF"             ; e_ident
+	        dd      1                                       ; p_type
+	        dd      0                                       ; p_offset
+	        dd      $$                                      ; p_vaddr
+	        dw      2                       ; e_type        ; p_paddr
+	        dw      3                       ; e_machine
+	        dd      _start                  ; e_version     ; p_filesz
+	        dd      _start                  ; e_entry       ; p_memsz
+	        dd      4                       ; e_phoff       ; p_flags
   _start:
-                pop     ecx     ; argc          ; e_shoff       ; p_align
-                pop     ecx     ; argv[0]
-                mov     dl, 5   ; str len       ; e_flags
-                mov     al, 4   ; sys_write(fd, addr, len) : ebx, ecx, edx
-                jmp     _next   ; jump to next part of the code
-                dw      0x34                      ; e_ehsize
-                dw      0x20                      ; e_phentsize
-                dw      1                         ; e_phnum
+	        pop     ecx     ; argc          ; e_shoff       ; p_align
+	        pop     ecx     ; argv[0]
+	        mov     dl, 5   ; str len       ; e_flags
+	        mov     al, 4   ; sys_write(fd, addr, len) : ebx, ecx, edx
+	        jmp     _next   ; jump to next part of the code
+	        dw      0x34                      ; e_ehsize
+	        dw      0x20                      ; e_phentsize
+	        dw      1                         ; e_phnum
   _next:        int     0x80    ; syscall         ; e_shentsize
-                mov     al, 1   ; eax=1,sys_exit  ; e_shnum
-                int     0x80    ; syscall         ; e_shstrndx
+	        mov     al, 1   ; eax=1,sys_exit  ; e_shnum
+	        int     0x80    ; syscall         ; e_shstrndx
 
   filesize      equ     $ - $$
 ```
@@ -1517,38 +1517,38 @@ $ wc -c hello
 # ld -melf_i386 --oformat=binary -o hello hello.o
 #
 
-        .file "hello.s"
-        .global _start, _load
-        .equ   LOAD_ADDR, 0x00010000   # Page aligned load addr, here 64k
-        .equ   E_ENTRY, LOAD_ADDR + (_start - _load)
-        .equ   P_MEM_SZ, E_ENTRY
-        .equ   P_FILE_SZ, P_MEM_SZ
+	.file "hello.s"
+	.global _start, _load
+	.equ   LOAD_ADDR, 0x00010000   # Page aligned load addr, here 64k
+	.equ   E_ENTRY, LOAD_ADDR + (_start - _load)
+	.equ   P_MEM_SZ, E_ENTRY
+	.equ   P_FILE_SZ, P_MEM_SZ
 
 _load:
-        .byte  0x7F
-        .ascii "ELF"                  # e_ident, Magic Number
-        .long  1                                      # p_type, loadable seg
-        .long  0                                      # p_offset
-        .long  LOAD_ADDR                              # p_vaddr
-        .word  2                      # e_type, exec  # p_paddr
-        .word  3                      # e_machine, Intel 386 target
-        .long  P_FILE_SZ              # e_version     # p_filesz
-        .long  E_ENTRY                # e_entry       # p_memsz
-        .long  4                      # e_phoff       # p_flags, read(exec)
-        .text
+	.byte  0x7F
+	.ascii "ELF"                  # e_ident, Magic Number
+	.long  1                                      # p_type, loadable seg
+	.long  0                                      # p_offset
+	.long  LOAD_ADDR                              # p_vaddr
+	.word  2                      # e_type, exec  # p_paddr
+	.word  3                      # e_machine, Intel 386 target
+	.long  P_FILE_SZ              # e_version     # p_filesz
+	.long  E_ENTRY                # e_entry       # p_memsz
+	.long  4                      # e_phoff       # p_flags, read(exec)
+	.text
 _start:
-        popl   %ecx    # argc         # e_shoff       # p_align
-        popl   %ecx    # argv[0]
-        mov    $5, %dl # str len      # e_flags
-        mov    $4, %al # sys_write(fd, addr, len) : ebx, ecx, edx
-        jmp    next    # jump to next part of the code
-        .word  0x34                   # e_ehsize = 52
-        .word  0x20                   # e_phentsize = 32
-        .word  1                      # e_phnum = 1
-        .text
+	popl   %ecx    # argc         # e_shoff       # p_align
+	popl   %ecx    # argv[0]
+	mov    $5, %dl # str len      # e_flags
+	mov    $4, %al # sys_write(fd, addr, len) : ebx, ecx, edx
+	jmp    next    # jump to next part of the code
+	.word  0x34                   # e_ehsize = 52
+	.word  0x20                   # e_phentsize = 32
+	.word  1                      # e_phnum = 1
+	.text
 _next:  int    $0x80   # syscall        # e_shentsize
-        mov    $1, %al # eax=1,sys_exit # e_shnum
-        int    $0x80   # syscall        # e_shstrndx
+	mov    $1, %al # eax=1,sys_exit # e_shnum
+	int    $0x80   # syscall        # e_shstrndx
 ```
 
 编译和运行效果如下：
@@ -1577,12 +1577,12 @@ $ wc -c hello
 ```
 .global _start
 _start:
-        popl %ecx	# argc
-        popl %ecx	# argv[0]
-        movb $5, %dl	# 设置字符串长度
-        movb $4, %al	# eax = 4, 设置系统调用号, sys_write(fd, addr, len) : ebx, ecx, edx
+	popl %ecx	# argc
+	popl %ecx	# argv[0]
+	movb $5, %dl	# 设置字符串长度
+	movb $4, %al	# eax = 4, 设置系统调用号, sys_write(fd, addr, len) : ebx, ecx, edx
 	int $0x80
-        movb $1, %al
+	movb $1, %al
 	int $0x80
 ```
 
@@ -1625,11 +1625,11 @@ $ hexdump -C hello
 ```
 .global _start
 _start:
-        popl %eax    # eax = 4, 设置系统调用号, sys_write(fd, addr, len) : ebx, ecx, edx
-        popl %ecx    # argv[0], 字符串
-        movb $5, %dl # 设置字符串长度
+	popl %eax    # eax = 4, 设置系统调用号, sys_write(fd, addr, len) : ebx, ecx, edx
+	popl %ecx    # argv[0], 字符串
+	movb $5, %dl # 设置字符串长度
 	int $0x80
-        movb $1, %al # eax = 1, sys_exit
+	movb $1, %al # eax = 1, sys_exit
 	int $0x80
 ```
 
@@ -1642,11 +1642,11 @@ _start:
 ```
 .global _start
 _start:
-        popl %eax	# eax = 4, 设置系统调用号, sys_write(fd, addr, len) : ebx, ecx, edx
-        popl %ecx	# argv[0], 字符串
-        movb $5, %dl	# 设置字符串长度
+	popl %eax	# eax = 4, 设置系统调用号, sys_write(fd, addr, len) : ebx, ecx, edx
+	popl %ecx	# argv[0], 字符串
+	movb $5, %dl	# 设置字符串长度
 	int $0x80
-        loop _start     # 触发系统退出
+	loop _start     # 触发系统退出
 ```
 
 **注**：上面我们使用了 `loop` 指令而不是 `jmp` 指令，因为 `jmp _start` 产生的代码更长，而 `loop _start` 指令只有两个字节。
@@ -1660,12 +1660,12 @@ _start:
 ```
 .global _start
 _start:
-        popl %eax    # argc, eax = 4, 设置系统调用号, sys_write(fd, addr, len) : ebx, ecx, edx
-        popl %ecx    # argv[0], 文件名
-        mov $5, %dl  # argv[1]，字符串长度
-        int $0x80
-        mov $0xffffffda, %eax  # 设置一个非法调用号用于退出
-        int $0x80
+	popl %eax    # argc, eax = 4, 设置系统调用号, sys_write(fd, addr, len) : ebx, ecx, edx
+	popl %ecx    # argv[0], 文件名
+	mov $5, %dl  # argv[1]，字符串长度
+	int $0x80
+	mov $0xffffffda, %eax  # 设置一个非法调用号用于退出
+	int $0x80
 ```
 
 那最后的结果是，我们产生了一个可以正常打印字符串，大小只有 45 字节的 `Elf` 文件，最终的结果如下：
@@ -1680,39 +1680,39 @@ _start:
 # hello
 #
 
-        .file "hello.s"
-        .global _start, _load
-        .equ   LOAD_ADDR, 0x00010000   # Page aligned load addr, here 64k
-        .equ   E_ENTRY, LOAD_ADDR + (_start - _load)
-        .equ   P_MEM_SZ, E_ENTRY
-        .equ   P_FILE_SZ, P_MEM_SZ
+	.file "hello.s"
+	.global _start, _load
+	.equ   LOAD_ADDR, 0x00010000   # Page aligned load addr, here 64k
+	.equ   E_ENTRY, LOAD_ADDR + (_start - _load)
+	.equ   P_MEM_SZ, E_ENTRY
+	.equ   P_FILE_SZ, P_MEM_SZ
 
 _load:
-        .byte  0x7F
-        .ascii "ELF"              # e_ident, Magic Number
-        .long  1                                      # p_type, loadable seg
-        .long  0                                      # p_offset
-        .long  LOAD_ADDR                              # p_vaddr
-        .word  2                  # e_type, exec  # p_paddr
-        .word  3                  # e_machine, Intel 386 target
-        .long  P_FILE_SZ          # e_version     # p_filesz
-        .long  E_ENTRY            # e_entry       # p_memsz
-        .long  4                  # e_phoff       # p_flags, read(exec)
-        .text
+	.byte  0x7F
+	.ascii "ELF"              # e_ident, Magic Number
+	.long  1                                      # p_type, loadable seg
+	.long  0                                      # p_offset
+	.long  LOAD_ADDR                              # p_vaddr
+	.word  2                  # e_type, exec  # p_paddr
+	.word  3                  # e_machine, Intel 386 target
+	.long  P_FILE_SZ          # e_version     # p_filesz
+	.long  E_ENTRY            # e_entry       # p_memsz
+	.long  4                  # e_phoff       # p_flags, read(exec)
+	.text
 _start:
-        popl   %eax    # argc     # e_shoff       # p_align
-                       # 4 args, eax = 4, sys_write(fd, addr, len) : ebx, ecx, edx
-                       # set 2nd eax = random addr to trigger bad syscall for exit
-        popl   %ecx    # argv[0]
-        mov    $5, %dl # str len  # e_flags
-        int    $0x80
-        loop   _start  # loop to popup a random addr as a bad syscall number 
-        .word  0x34               # e_ehsize = 52
-        .word  0x20               # e_phentsize = 32
-        .byte  1                  # e_phnum = 1, remove trailing 7 bytes with 0 value
-                                  # e_shentsize
-                                  # e_shnum
-                                  # e_shstrndx
+	popl   %eax    # argc     # e_shoff       # p_align
+	               # 4 args, eax = 4, sys_write(fd, addr, len) : ebx, ecx, edx
+	               # set 2nd eax = random addr to trigger bad syscall for exit
+	popl   %ecx    # argv[0]
+	mov    $5, %dl # str len  # e_flags
+	int    $0x80
+	loop   _start  # loop to popup a random addr as a bad syscall number
+	.word  0x34               # e_ehsize = 52
+	.word  0x20               # e_phentsize = 32
+	.byte  1                  # e_phnum = 1, remove trailing 7 bytes with 0 value
+	                          # e_shentsize
+	                          # e_shnum
+	                          # e_shstrndx
 ```
 
 效果如下：
