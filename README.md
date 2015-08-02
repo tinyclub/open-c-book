@@ -54,6 +54,8 @@ v 0.2
 
 <span id="donate"><img src="pic/tinylab-sponsor-1.68.jpg" width="160"/></span>
 
+更多支持请访问 [泰晓开源小店](http://weidian.com/?userid=335178200)
+
 ### 更多原创开源书籍
 
 * [Shell 编程范例](http://tinylab.gitbooks.io/shellbook/)
