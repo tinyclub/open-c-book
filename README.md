@@ -1,7 +1,7 @@
 > 本书来源：[开源书籍：C 语言编程透视](http://www.tinylab.org/project/hello-c-world/) (by [泰晓科技](http://tinylab.org))<br>
 > 报名参与：*Star/fork* [GitHub 仓库](https://github.com/tinyclub/open-c-book) 并发送 *Pull Request*<br>
-> 关注我们：[扫描二维码](#follow) 关注 [@泰晓科技](http://weibo.com/tinylaborg) 微博<br>
-> 赞助我们：[赞助 1.68￥](#donate)，[更多原创开源书籍](#more)期待您的支持 ^o^ <br>
+> 关注我们：[扫描二维码](#follow) 关注 [@泰晓科技](http://weibo.com/tinylaborg) 微博和微信公众号<br>
+> 赞助我们：[赞助 1.68￥](#donate), [更多原创开源书籍](#more)需要您的支持 ^o^ <br>
 
 
 # C 语言编程透视
@@ -46,15 +46,28 @@ v 0.2
 
 <hr>
 
+<span id="follow"></span>
 ### 关注我们
 
-<span id="follow"><img src="pic/tinylab-logo-sina.jpg" width="150"/></span>
+-   [新浪微博](http://weibo.com/tinylaborg)
 
+   [<img src="pic/tinylab-sina.jpg" width="150"/>](http://weibo.com/tinylaborg)
+
+-   微信公众号
+
+   <img src="pic/tinylab-weixin.jpg" width="150"/>
+
+
+<span id="donate"></span>
 ### 赞助我们
 
-<span id="donate"><img src="pic/tinylab-sponsor-1.68.jpg" width="160"/></span>
+* 直接微信扫码赞助 1.68￥
 
-更多支持请访问 [泰晓开源小店](http://weidian.com/?userid=335178200)
+    <img src="pic/tinylab-sponsor.jpg" width="150"/>
+
+* 访问 [泰晓开源小店](http://weidian.com/?userid=335178200) 赞助心仪项目
+
+    [<img src="pic/tinylab-shop.jpg" width="150"/>](http://weidian.com/?userid=335178200)
 
 ### 更多原创开源书籍
 
