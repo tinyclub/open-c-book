@@ -61,11 +61,11 @@ v 0.2
 <span id="donate"></span>
 ### 赞助我们
 
-* 直接微信扫码赞助 1.68￥
+* 微信扫码赞助 1.68￥
 
     <img src="pic/tinylab-sponsor.jpg" width="150"/>
 
-* 访问 [泰晓开源小店](http://weidian.com/?userid=335178200) 赞助心仪项目
+* 访问 [泰晓开源小店](http://weidian.com/?userid=335178200) 支持心仪项目
 
     [<img src="pic/tinylab-shop.jpg" width="150"/>](http://weidian.com/?userid=335178200)
 
