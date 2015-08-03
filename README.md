@@ -69,6 +69,7 @@ v 0.2
 
     [<img src="pic/tinylab-shop.jpg" width="150"/>](http://weidian.com/?userid=335178200)
 
+<span id="more"></span>
 ### 更多原创开源书籍
 
 * [Shell 编程范例](http://tinylab.gitbooks.io/shellbook/)
