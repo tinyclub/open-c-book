@@ -1214,7 +1214,7 @@ $ echo -ne "\x01\x00\x00\x00\x00\x00\x00\x00" \
     dd of=hello bs=1 count=25 seek=4 conv=notrunc
 ```
 
-截掉代码（52 + 32 + 12）之后的所有内容，查看效果如下：
+截掉代码（52 + 32 + 12 = 96）之后的所有内容，查看效果如下：
 
 ```
 $ dd if=hello of=hello bs=1 count=1 skip=96 seek=96
