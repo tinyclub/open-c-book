@@ -14,6 +14,7 @@ v 0.2
 
 - 项目首页：<http://www.tinylab.org/project/hello-c-world/>
 - 代码仓库：[https://github.com/tinyclub/open-c-book.git](https://github.com/tinyclub/open-c-book)
+- 在线阅读：<http://tinylab.gitbooks.io/cbook>
 
     更多背景和计划请参考：[前言](zh/preface/01-chapter1.markdown)。
 
