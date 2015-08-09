@@ -52,11 +52,11 @@ v 0.2
 
 -   [新浪微博](http://weibo.com/tinylaborg)
 
-   [<img src="pic/tinylab-sina.jpg" width="150"/>](http://weibo.com/tinylaborg)
+   [<img src="pic/tinylab-sina.jpg" width="100px"/>](http://weibo.com/tinylaborg)
 
 -   微信公众号
 
-   <img src="pic/tinylab-weixin.jpg" width="150"/>
+   <img src="pic/tinylab-weixin.jpg" width="100px"/>
 
 
 <span id="donate"></span>
@@ -64,11 +64,11 @@ v 0.2
 
 * 微信扫码赞助 1.68￥
 
-    <img src="pic/tinylab-sponsor.jpg" width="150"/>
+    <img src="pic/tinylab-sponsor.jpg" width="100px"/>
 
 * 访问 [泰晓开源小店](http://weidian.com/?userid=335178200) 支持心仪项目
 
-    [<img src="pic/tinylab-shop.jpg" width="150"/>](http://weidian.com/?userid=335178200)
+    [<img src="pic/tinylab-shop.jpg" width="100px"/>](http://weidian.com/?userid=335178200)
 
 <span id="more"></span>
 ### 更多原创开源书籍
