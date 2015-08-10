@@ -62,7 +62,7 @@ v 0.2
 <span id="donate"></span>
 ### 赞助我们
 
-* 微信扫码赞助 1.68￥
+* 微信扫码赞助原创
 
     <img src="pic/tinylab-sponsor.jpg" width="168px"/>
 
