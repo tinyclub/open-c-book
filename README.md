@@ -24,8 +24,8 @@ v 0.2
 
     $ sudo aptitude install -y retext git nodejs npm
     $ sudo ln -fs /usr/bin/nodejs /usr/bin/node
-    $ aptitude install -y calibre fonts-arphic-gbsn00lp
-    $ npm install gitbook-cli -g
+    $ sudo aptitude install -y calibre fonts-arphic-gbsn00lp
+    $ sudo npm install gitbook-cli -g
 
 ### 下载
 
