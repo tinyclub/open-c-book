@@ -75,3 +75,4 @@ v 0.2
 
 * [Shell 编程范例](http://tinylab.gitbooks.io/shellbook/)
 * [嵌入式 Linux 知识库(eLinux.org 中文版)](http://tinylab.gitbooks.io/elinux/)
+* [Linux 内核文档(Linux Documentation/ 中文版)](http://tinylab.gitbooks.io/linux-doc/)
