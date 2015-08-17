@@ -2,6 +2,12 @@
     "author": "Wu Zhangjin <wuzhangjin@gmail.com>",
     "description": "这是开源书籍《C 语言编程透视》的 GitBook 版本",
     "generator": "site",
+    "plugins" : [ "disqus", "google_code_prettify", "collapsible-menu", "betterchinese", "maxiang", "livereload"],
+    "pluginsConfig": {
+        "disqus": {
+            "shortName": "tinylab"
+        }
+    },
     "links": {
         "sidebar": {
             "泰晓科技": "http://www.tinylab.org",
