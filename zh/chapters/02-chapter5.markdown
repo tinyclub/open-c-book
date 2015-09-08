@@ -386,7 +386,7 @@ $ cat -n /proc/self/maps
 
 ```
 $ gcc -g -o shellcode shellcode.c   #要用gdb调试，在编译时需要加-g参数
-$ gdb ./shellcode
+$ gdb -q ./shellcode
 (gdb) set args arg1 arg2 arg3 arg4  #为了测试，设置几个参数
 (gdb) l                             #浏览代码
 1 /* shellcode.c */
@@ -497,7 +497,7 @@ sum = 6
 
 ```
 $ gcc -g -o testshellcode testshellcode.c  #为了调试，需要在编译时加-g选项
-$ gdb ./testshellcode   #启动gdb调试
+$ gdb -q ./testshellcode   #启动gdb调试
 ...
 (gdb) set logging on    #如果要记录调试过程中的信息，可以把日志记录功能打开
 Copying output to gdb.txt.
@@ -754,7 +754,7 @@ memcpy(buffer, STR_SRC, sizeof(STR_SRC)-1);
 
 ```
 $ gcc -DSTR1 -g -o testshellcode testshellcode.c
-$ gdb ./testshellcode
+$ gdb -q ./testshellcode
 ...
 (gdb) l
 21
@@ -1135,9 +1135,7 @@ sum = 6
 
 ```
 $ gcc -g -o shellcode shellcode.c
-$ gdb ./shellcode
-GNU gdb 6.6
-...
+$ gdb -q ./shellcode
 (gdb) disassemble main
 Dump of assembler code for function main:
 ...
@@ -1272,8 +1270,7 @@ ret = (int *)&ret + 2;
 
 ```
 $ gcc -g -o testshellcode testshellcode.c
-$ gdb ./testshellcode
-...
+$ gdb -q ./testshellcode
 (gdb) l
 8       void callshellcode(void)
 9       {

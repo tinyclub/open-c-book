@@ -821,8 +821,7 @@ ld: warning: cannot find entry symbol _start; defaulting to 00000000080481d8
 $ ./test
 hello, world!
 Segmentation fault
-$ gdb ./test
-...
+$ gdb -q ./test
 (gdb) l
 1       #include "test.h"
 2
@@ -892,8 +891,7 @@ $ cat test.s    #貌似就把ret指令替换成了_exit函数调用，直接进�
         pushl   $0
         call    _exit
 ...
-$ gdb ./test    #把代码改回去（改成return 0;），再调试看看调用main函数返回时的下一条指令地址eip
-...
+$ gdb -q ./test    #把代码改回去（改成return 0;），再调试看看调用main函数返回时的下一条指令地址eip
 (gdb) l
 warning: Source file is more recent than executable.
 1       #include "test.h"

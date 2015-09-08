@@ -636,7 +636,7 @@ got2: 0xb7f1e6d8, got3: 0xb7f15f10, old_addr: 0x80482da, new_addr: 0xb7e00a20
 
 ```
 $ gcc -g -o got got.c
-$ gdb ./got
+$ gdb -q ./got
 (gdb) l
 5       #include <stdio.h>
 6

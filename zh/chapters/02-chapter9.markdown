@@ -515,8 +515,7 @@ $ gdbserver :port /path/to/binary_file
 然后在本地主机上启动gdb客户端链接到 `gdb` 调试服务器，（`gdbserver_ipaddress` 是目标系统的IP地址，如果目标系统不支持网络，那么可以采用串口的方式，具体看手册）
 
 ```
-$ gdb
-...
+$ gdb -q
 (gdb) target remote gdbserver_ipaddress:2345
 ...
 ```
