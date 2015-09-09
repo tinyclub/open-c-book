@@ -11,7 +11,7 @@
 <span id="toc_14856_6356_1"></span>
 ## 前言
 
-在阅读《UNIX 环境高级编程 》的第 14 章时，看到一个“打印不同类型的数据所存放的位置”的例子，它非常清晰地从程序内部反应了“进程的内存映像”，通过结合它与[《Gcc 编译的背后》][1]和[《缓冲区溢出与注入分析》][2]的相关内容，可以更好地辅助理解相关的内容。
+在阅读《[UNIX 环境高级编程](https://en.wikipedia.org/wiki/Advanced_Programming_in_the_Unix_Environment)》的第 14 章时，看到一个“打印不同类型的数据所存放的位置”的例子，它非常清晰地从程序内部反应了“进程的内存映像”，通过结合它与[《Gcc 编译的背后》][1]和[《缓冲区溢出与注入分析》][2]的相关内容，可以更好地辅助理解相关的内容。
 
 [1]: 02-chapter2.markdown
 [2]: 02-chapter5.markdown
@@ -44,7 +44,7 @@
 <span id="toc_14856_6356_3"></span>
 ## 在程序内部打印内存分布信息
 
-为了能够反应上述内存分布情况，这里在《UNIX 环境高级编程 》的程序 14-11 的基础上，添加了一个已经初始化的全局变量（存放在已经初始化的数据段内），并打印了它以及 `main` 函数(处在代码正文部分)的位置。
+为了能够反应上述内存分布情况，这里在《[UNIX 环境高级编程](https://en.wikipedia.org/wiki/Advanced_Programming_in_the_Unix_Environment)》的程序 14-11 的基础上，添加了一个已经初始化的全局变量（存放在已经初始化的数据段内），并打印了它以及 `main` 函数(处在代码正文部分)的位置。
 
 ```
 /**
@@ -267,4 +267,4 @@ env:      0xbff85bfc (address of environment variables)
 
 - [Gcc 编译的背后（第二部分：汇编和链接）][1]
 - [缓冲区溢出与注入分析][2]
-- 《Unix 环境高级编程》第 14 章，程序 14-11
+- 《[Unix 环境高级编程](https://en.wikipedia.org/wiki/Advanced_Programming_in_the_Unix_Environment)》第 14 章，程序 14-11
