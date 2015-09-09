@@ -27,7 +27,7 @@
 
 - 关于测试（或验证）
 
-  通常对应着两个英文单词 `Verification和 `Validation`，在资料 [\[1\]][1] 中有关于这个的定义和一些深入的讨论，在资料 [\[2\]][2] 中，很多人给出了自己的看法。但是正如资料 [\[2\]][2] 提到的：
+  通常对应着两个英文单词 `Verification` 和 `Validation`，在资料 [\[1\]][1] 中有关于这个的定义和一些深入的讨论，在资料 [\[2\]][2] 中，很多人给出了自己的看法。但是正如资料 [\[2\]][2] 提到的：
 
   > The differences between verification and validation are unimportant except to the theorist; practitioners use the term V&V to refer to all of the activities that are aimed at making sure the software will function as required.
 
