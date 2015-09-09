@@ -290,7 +290,7 @@
 <span id="toc_10579_14683_19"></span>
 ## 进程通信
 
-为便于设计和实现，通常一个大型的任务都被划分成较小的模块。不同模块之间启动后成为进程，它们之间如何通信以便交互数据，协同工作呢？在《UNIX 环境高级编程》一书中提到很多方法，诸如管道（无名管道和有名管道）、信号（`signal`）、报文（`Message`）队列（消息队列）、共享内存（`mmap/munmap`）、信号量（`semaphore`，主要是同步用，进程之间，进程的不同线程之间）、套接口（`Socket`，支持不同机器之间的进程通信）等，而在 Shell 中，通常直接用到的就有管道和信号等。下面主要介绍管道和信号机制在 Shell 编程时的一些用法。
+为便于设计和实现，通常一个大型的任务都被划分成较小的模块。不同模块之间启动后成为进程，它们之间如何通信以便交互数据，协同工作呢？在《[UNIX 环境高级编程](https://en.wikipedia.org/wiki/Advanced_Programming_in_the_Unix_Environment)》一书中提到很多方法，诸如管道（无名管道和有名管道）、信号（`signal`）、报文（`Message`）队列（消息队列）、共享内存（`mmap/munmap`）、信号量（`semaphore`，主要是同步用，进程之间，进程的不同线程之间）、套接口（`Socket`，支持不同机器之间的进程通信）等，而在 Shell 中，通常直接用到的就有管道和信号等。下面主要介绍管道和信号机制在 Shell 编程时的一些用法。
 
 <span id="toc_10579_14683_20"></span>
 ### 无名管道（pipe）
@@ -449,4 +449,4 @@
 <span id="toc_10579_14683_28"></span>
 ## 参考资料
 
--   《UNIX 环境高级编程》
+-   《[UNIX 环境高级编程](https://en.wikipedia.org/wiki/Advanced_Programming_in_the_Unix_Environment)》
