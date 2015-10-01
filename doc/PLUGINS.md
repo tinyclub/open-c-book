@@ -11,7 +11,7 @@
     -   不为 pdf 生成导航
 
 * [gitbook-plugin-toc](http://plugins.gitbook.com/plugin/toc)
-    -   需要修改 Markdown 文件，并且不支持中文，对于 pdf 可能会有一些用。可补充 maxiang（在anchor-navigation修复之前）
+    -   需要修改 Markdown 文件，并且不支持中文，对于 pdf 可能会有一些用。可补充 maxiang（在 anchor-navigation 修复之前）
 
 ## Sidebar
 
