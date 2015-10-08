@@ -84,7 +84,7 @@
 
 自由书籍将会维护在 [泰晓科技](http://tinylab.org) 的[项目仓库](https://github.com/tinyclub/open-c-book)中。项目相关信息如下：
 
--   项目首页：<http://www.tinylab.org/project/hello-c-world/>
+-   项目首页：<http://www.tinylab.org/open-c-book/>
 -   代码仓库：[https://github.com/tinyclub/open-c-book.git](https://github.com/tinyclub/open-c-book)
 
 欢迎大家指出本书初稿中的不足，甚至参与到相关章节的写作、校订和完善中来。
