@@ -1499,7 +1499,7 @@ $ wc -c ret
 编译和用法如下：
 
 ```
-$ ./nasm -f bin -o hello hello.asm a.
+$ nasm -f bin -o hello hello.asm
 $ chmod a+x hello
 $ export PATH=./:$PATH
 $ hello
