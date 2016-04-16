@@ -24,7 +24,7 @@ v 0.2
 
     $ sudo apt-get install retext git nodejs npm
     $ sudo apt-get install calibre fonts-arphic-gbsn00lp
-    $ sudo npm install gitbook-cli
+    $ sudo npm install gitbook-cli -g
     $ sudo rm /usr/local/bin/gitbook
     $ sudo sh -c 'echo "nodejs /usr/local/lib/node_modules/gitbook-cli/bin/gitbook.js \$@" > /usr/local/bin/gitbook'
     $ sudo chmod +x /usr/local/bin/gitbook
