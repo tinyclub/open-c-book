@@ -10,11 +10,11 @@
     },
     "links": {
         "sidebar": {
-            "泰晓科技": "http://www.tinylab.org",
-            "开源小店": "http://weidian.com/?userid=335178200",
             "项目首页": "http://www.tinylab.org/open-c-book",
-            "嵌入式 Linux 知识库": "http://tinylab.gitbooks.io/elinux",
-            "Linux 内核文档": "http://tinylab.gitbooks.io/linux-doc",
+            "泰晓科技": "http://www.tinylab.org",
+            "开源小店 < 捐助原创": "http://weidian.com/?userid=335178200",
+            "生活不止眼前的 Bug": "http://tinylab.gitbooks.io/coders-poems",
+            "还有远方的茶园……": "http://weidian.com/?userid=317479118",
             "Shell 编程范例": "http://tinylab.gitbooks.io/shellbook"
         }
     },
