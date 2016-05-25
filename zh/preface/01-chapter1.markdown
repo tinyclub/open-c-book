@@ -8,7 +8,7 @@
 <span id="toc_1235_30984_1"></span>
 ## 背景
 
-2007 年开始系统地学习 Shell 编程，并在[兰大开源社区](http://oss.lzu.edu.cn)写了序列文章。
+笔者 2007 年开始系统地学习 Shell 编程，并在[兰大开源社区](http://oss.lzu.edu.cn)写了序列文章。
 
 在编写[《Shell 编程范例》](http://tinylab.gitbooks.io/shellbook)文章的[《进程操作》](http://tinylab.gitbooks.io/shellbook/content/zh/chapters/01-chapter7.html)一章时，为了全面了解进程的来龙去脉，对程序开发过程的细节、ELF 格式的分析、进程的内存映像等进行了全面地梳理，后来搞得“雪球越滚越大”，甚至脱离了 Shell 编程关注的内容。所以想了个小办法，“大事化小，小事化了”，把涉及到的内容进行了分解，进而演化成另外一个完整的序列。
 
