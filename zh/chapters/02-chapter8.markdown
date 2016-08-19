@@ -76,7 +76,7 @@ $ readelf -h hello.o | grep Type   #通过readelf查看文件头部找出该类�
 $ gcc -o hello hello.o   #生成可执行文件
 $ readelf -h hello | grep Type
   Type:                              EXEC (Executable file)
-$ gcc -fpic -shared -W1,-soname,libhello.so.0 -o libhello.so.0.0 hello.o  #生成共享库
+$ gcc -fpic -shared -Wl,-soname,libhello.so.0 -o libhello.so.0.0 hello.o  #生成共享库
 $ readelf -h libhello.so.0.0 | grep Type
   Type:                              DYN (Shared object file)
 ```
