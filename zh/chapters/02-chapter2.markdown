@@ -1022,7 +1022,7 @@ int main(void)
 - [Understanding ELF using readelf and objdump](http://www.linuxforums.org/misc/understanding_elf_using_readelf_and_objdump.html)
 - [Study of ELF loading and relocs](http://netwinder.osuosl.org/users/p/patb/public_html/elf_relocs.html)
 - ELF file format and ABI
-    - [\[1\]](http://www.x86.org/ftp/manuals/tools/elf.pdf)
+    - [\[1\]](http://refspecs.linuxbase.org/elf/elf.pdf)
     - [\[2\]](http://www.muppetlabs.com/~breadbox/software/ELF.txt)
 - TN05.ELF.Format.Summary.pdf
 - [ELF文件格式(中文)](http://www.xfocus.net/articles/200105/174.html)
