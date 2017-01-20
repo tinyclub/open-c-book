@@ -1764,7 +1764,7 @@ $ wc -c hello
  [8]: http://www.gexin.com.cn/UploadFile/document2008119102415.pdf
  [9]: http://www.ibm.com/developerworks/cn/linux/l-assembly/index.html
  [10]: http://sourceforge.net/projects/libraryopt
- [11]: http://www.x86.org/ftp/manuals/tools/elf.pdf
+ [11]: http://refspecs.linuxbase.org/elf/elf.pdf
  [12]: http://www.muppetlabs.com/~breadbox/software/ELF.txt
  [13]: http://162.105.203.48/web/gaikuang/submission/TN05.ELF.Format.Summary.pdf
  [14]: http://www.xfocus.net/articles/200105/174.html

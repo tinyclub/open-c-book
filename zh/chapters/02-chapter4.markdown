@@ -843,5 +843,5 @@ Dump of assembler code for function puts:
  [12]: http://www.ibm.com/developerworks/cn/linux/l-overflow/index.html
  [13]: http://www.ibm.com/developerworks/cn/linux/l-elf/part1/index.html
  [14]: http://www.ibm.com/developerworks/cn/linux/l-elf/part2/index.html
- [15]: http://www.x86.org/ftp/manuals/tools/elf.pdf
+ [15]: http://refspecs.linuxbase.org/elf/elf.pdf
  [16]: http://www.muppetlabs.com/~breadbox/software/ELF.txt

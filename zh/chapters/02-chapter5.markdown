@@ -109,7 +109,7 @@ int main(void)
 
 通常在函数调用后，还需要恢复 `esp` 和 `ebp`，恢复 `esp` 即恢复当前栈指针，以便释放调用函数时为存储函数的局部变量而自动分配的空间；恢复 `ebp` 是从栈中弹出一个数据项（通常函数调用过后的第一条语句就是 `push ebp`），从而恢复当前的函数指针为函数调用者本身。这两个动作可以通过一条 `leave` 指令完成。
 
-这三个指令对我们后续的解释会很有帮助。更多关于 Intel 的指令集，请参考：[Intel 386 Manual](http://www.x86.org/intel.doc/386manuals.htm), x86 Assembly Language FAQ：[part1](http://www.faqs.org/faqs/assembly-language/x86/general/part1/), [part2](http://www.faqs.org/faqs/assembly-language/x86/general/part2/), [part3](http://www.faqs.org/faqs/assembly-language/x86/general/part3/).
+这三个指令对我们后续的解释会很有帮助。更多关于 Intel 的指令集，请参考：[Intel 386 Manual](http://www.rcollins.org/intel.doc/386Manuals.html), x86 Assembly Language FAQ：[part1](http://www.faqs.org/faqs/assembly-language/x86/general/part1/), [part2](http://www.faqs.org/faqs/assembly-language/x86/general/part2/), [part3](http://www.faqs.org/faqs/assembly-language/x86/general/part3/).
 
 <span id="toc_14869_27504_5"></span>
 ### 什么是系统调用（以 Linux 2.6.21 版本和 x86 平台为例）
@@ -145,7 +145,7 @@ int main(void)
 <span id="toc_14869_27504_6"></span>
 ### 什么是 ELF 文件
 
-这里的 ELF 不是“精灵”，而是 Executable and Linking Format 文件，是 Linux 下用来做目标文件、可执行文件和共享库的一种文件格式，它有专门的标准，例如：[X86 ELF format and ABI](http://www.x86.org/ftp/manuals/tools/elf.pdf)，[中文版](http://www.xfocus.net/articles/200105/174.html)。
+这里的 ELF 不是“精灵”，而是 Executable and Linking Format 文件，是 Linux 下用来做目标文件、可执行文件和共享库的一种文件格式，它有专门的标准，例如：[X86 ELF format and ABI](http://refspecs.linuxbase.org/elf/elf.pdf)，[中文版](http://www.xfocus.net/articles/200105/174.html)。
 
 下面简单描述 `ELF` 的格式。
 
