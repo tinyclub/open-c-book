@@ -1,3 +1,4 @@
+> 联系作者：笔者为一位[重度开源践行者](http://tinylab.org/hello-tinylab/#section-2)，可微信联系：lzufalcon<br>
 > 本书来源：[开源书籍：C 语言编程透视](http://www.tinylab.org/open-c-book/) (by [泰晓科技](http://tinylab.org))<br>
 > 报名参与：*Star/fork* [GitHub 仓库](https://github.com/tinyclub/open-c-book) 并发送 *Pull Request*<br>
 > 关注我们：[扫描二维码](#follow) 关注 [@泰晓科技](http://weibo.com/tinylaborg) 微博和微信公众号<br>
