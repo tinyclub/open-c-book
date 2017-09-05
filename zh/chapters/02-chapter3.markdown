@@ -332,10 +332,12 @@ alias
 
 先看看 `PATH` 环境变量，确保它有 `/usr/bin`，`/bin` 和 `/usr/local/sbin` 这几个目录，然后通过 `type -P`（`-P` 参数强制到 `PATH` 下查找，而不管是别名还是内置命令等，可以通过 `help type` 查看该参数的含义）查看，到底哪个先被执行。
 
+```
 $ echo $PATH
 /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin:/usr/games
 $ type -P test
 /usr/local/sbin/test
+```
 
 如上可以看到 `/usr/local/sbin` 下的先被找到。
 
