@@ -1,8 +1,11 @@
-all:
+all: install
 	gitbook build
 
-pdf:
+pdf: install
 	gitbook pdf
+
+install:
+	gitbook install
 
 read-pdf:
 	evince book.pdf
