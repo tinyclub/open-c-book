@@ -1,4 +1,4 @@
-* [简介](README.markdown)
+* [简介](README.md)
 * [版本修订历史](zh/preface/01-chapter0.markdown)
 * [前言](zh/preface/01-chapter1.markdown)
 * [把 Vim 打造成源代码编辑器](zh/chapters/02-chapter1.markdown)
