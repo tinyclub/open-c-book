@@ -1,3 +1,8 @@
+**关注作者公众号**：
+<br/>
+<img src='../../pic/tinylab-wechat.jpg' width='110px'/>
+<br/>
+
 # 进程和进程的基本操作
 
 -    [前言](#toc_10579_14683_1)

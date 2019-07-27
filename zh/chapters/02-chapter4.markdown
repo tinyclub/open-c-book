@@ -1,3 +1,8 @@
+**关注作者公众号**：
+<br/>
+<img src='../../pic/tinylab-wechat.jpg' width='110px'/>
+<br/>
+
 # 动态符号链接的细节
 
 -    [前言](#toc_23258_14315_1)

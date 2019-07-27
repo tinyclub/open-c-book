@@ -1,3 +1,8 @@
+**关注作者公众号**：
+<br/>
+<img src='../../pic/tinylab-wechat.jpg' width='110px'/>
+<br/>
+
 # 缓冲区溢出与注入分析
 
 -    [前言](#toc_14869_27504_1)

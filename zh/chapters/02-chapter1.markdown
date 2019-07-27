@@ -1,3 +1,8 @@
+**关注作者公众号**：
+<br/>
+<img src='../../pic/tinylab-wechat.jpg' width='110px'/>
+<br/>
+
 # 把 Vim 打造成源代码编辑器
 
 -    [前言](#toc_1212_1748_1)

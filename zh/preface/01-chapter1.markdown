@@ -1,3 +1,8 @@
+**关注作者公众号**：
+<br/>
+<img src='../../pic/tinylab-wechat.jpg' width='110px'/>
+<br/>
+
 # 前言
 
 -    [背景](#toc_1235_30984_1)

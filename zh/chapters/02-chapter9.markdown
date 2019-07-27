@@ -1,3 +1,8 @@
+**关注作者公众号**：
+<br/>
+<img src='../../pic/tinylab-wechat.jpg' width='110px'/>
+<br/>
+
 # 代码测试、调试与优化
 
 -    [前言](#toc_7140_15195_1)
