@@ -1,3 +1,8 @@
+**关注作者公众号**：
+<br/>
+<img src='../../pic/tinylab-wechat.jpg' width='110px'/>
+<br/>
+
 # Gcc 编译的背后
 
 -    [前言](#toc_27212_14734_1)
