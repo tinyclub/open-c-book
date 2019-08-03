@@ -1546,7 +1546,7 @@ _start:
 	popl   %ecx    # argv[0]
 	mov    $5, %dl # str len      # e_flags
 	mov    $4, %al # sys_write(fd, addr, len) : ebx, ecx, edx
-	jmp    next    # jump to next part of the code
+	jmp    _next    # jump to next part of the code
 	.word  0x34                   # e_ehsize = 52
 	.word  0x20                   # e_phentsize = 32
 	.word  1                      # e_phnum = 1
