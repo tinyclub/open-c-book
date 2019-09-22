@@ -208,7 +208,7 @@ Linux 下 `elf` 文件的动态链接器是 `ld-linux.so`，即 `/lib/ld-linux.s
 
 对于文件，除了上面提到的 `ld.so.conf` 和 `ld.so.cache` 外，还有一个文件 `/etc/ld.so.preload` 用于指定需要预装载的库。
 
-从上一小节中发现有一个专门的节区 `.interp` 存放有动态链接器，但是这个节区为什么叫做 `.interp` （`interpeter`）`呢？因为当 Shell 解释器或者其他父进程通过 `exec` 启动我们的程序时，系统会先为 `ld-linux` 创建内存映像，然后把控制权交给 `ld-linux`，之后 `ld-linux` 负责为可执行程序提供运行环境，负责解释程序的运行，因此 `ld-linux` 也叫做 `dynamic loader` （或 `intepreter`）（关于程序的加载过程请参考资料 [\[13\]][13]）
+从上一小节中发现有一个专门的节区 `.interp` 存放有动态链接器，但是这个节区为什么叫做 `.interp` （`interpeter`）呢？因为当 Shell 解释器或者其他父进程通过 `exec` 启动我们的程序时，系统会先为 `ld-linux` 创建内存映像，然后把控制权交给 `ld-linux`，之后 `ld-linux` 负责为可执行程序提供运行环境，负责解释程序的运行，因此 `ld-linux` 也叫做 `dynamic loader` （或 `intepreter`）（关于程序的加载过程请参考资料 [\[13\]][13]）
 
 那么在 `exec` （）之后和程序指令运行之前的过程是怎样的呢？ `ld-linux.so` 主要为程序本身创建了内存映像（以下内容摘自资料 [\[8\]][8]），大体过程如下：
 
