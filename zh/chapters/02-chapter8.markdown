@@ -1640,38 +1640,7 @@ _start:
 
 这里需要传入 4 个参数，即让栈弹出的第一个值，也就是参数个数赋予 `eax`，也就是：`hello 5 4 1`。
 
-难道我们只能把该代码优化到 10 个字节？
-
-巧合地是，当偶然改成这样的情况下，该代码还能正常返回。
-
-```
-.global _start
-_start:
-	popl %eax	# eax = 4, 设置系统调用号, sys_write(fd, addr, len) : ebx, ecx, edx
-	popl %ecx	# argv[0], 字符串
-	movb $5, %dl	# 设置字符串长度
-	int $0x80
-	loop _start     # 触发系统退出
-```
-
-**注**：上面我们使用了 `loop` 指令而不是 `jmp` 指令，因为 `jmp _start` 产生的代码更长，而 `loop _start` 指令只有两个字节。
-
-这里相当于删除了 `movb $1, %al`，最后我们获得了 8 个字节。但是这里为什么能够工作呢？
-
-经过分析 `arch/x86/ia32/ia32entry.S`，我们发现当系统调用号无效时（超过系统调用入口个数），内核为了健壮考虑，必须要处理这类异常，并通过 `ia32_badsys` 让系统调用正常返回。
-
-这个可以这样验证：
-
-```
-.global _start
-_start:
-	popl %eax    # argc, eax = 4, 设置系统调用号, sys_write(fd, addr, len) : ebx, ecx, edx
-	popl %ecx    # argv[0], 文件名
-	mov $5, %dl  # argv[1]，字符串长度
-	int $0x80
-	mov $0xffffffda, %eax  # 设置一个非法调用号用于退出
-	int $0x80
-```
+这样，我们就把该代码优化到 10 个字节，刚好可以放到 `e_phentsize` 之前。
 
 那最后的结果是，我们产生了一个可以正常打印字符串，大小只有 45 字节的 `Elf` 文件，最终的结果如下：
 
@@ -1711,8 +1680,8 @@ _start:
 	popl   %ecx    # argv[0]
 	mov    $5, %dl # str len  # e_flags
 	int    $0x80
-	loop   _start  # loop to popup a random addr as a bad syscall number
-	.word  0x34               # e_ehsize = 52
+	mov    $1, %al # eax = 1, sys_exit
+	int    $0x80
 	.word  0x20               # e_phentsize = 32
 	.byte  1                  # e_phnum = 1, remove trailing 7 bytes with 0 value
 	                          # e_shentsize
