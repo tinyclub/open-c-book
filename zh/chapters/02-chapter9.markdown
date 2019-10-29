@@ -1,6 +1,6 @@
-**配套视频课程已全面上线**：
+**配套视频课程已全面上线**：10 个课时，20 份标准文档，45 份实验素材；数十张图表
 <br/>
-<a title="10 个课时，20 份标准文档，45 份实验素材；数十张图表" href="https://w.url.cn/s/AMcKZ3a" target="_blank"><img src="pic/elf-horizontal.jpg" style="max-height:250px; max-width:100%">
+<a href="https://w.url.cn/s/AMcKZ3a" target="_blank"><img src="../../pic/elf-horizontal.jpg" style="max-height:250px; max-width:100%">
 </a>
 <br/>
 

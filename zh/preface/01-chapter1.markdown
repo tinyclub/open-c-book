@@ -1,6 +1,7 @@
-**关注作者公众号**：
+**配套视频课程已全面上线**：10 个课时，20 份标准文档，45 份实验素材；数十张图表
 <br/>
-<img src='../../pic/tinylab-wechat.jpg' width='110px'/>
+<a href="https://w.url.cn/s/AMcKZ3a" target="_blank"><img src="../../pic/elf-horizontal.jpg" style="max-height:250px; max-width:100%">
+</a>
 <br/>
 
 # 前言
@@ -95,3 +96,10 @@
 欢迎大家指出本书初稿中的不足，甚至参与到相关章节的写作、校订和完善中来。
 
 如果有时间和兴趣，欢迎参与。可以通过 [泰晓科技](http://www.tinylab.org/about/) 联系我们，或者直接关注微博[@泰晓科技](http://weibo.com/tinylaborg)并私信我们。
+
+<hr>
+
+**关注作者公众号**：
+<br/>
+<img src='../../pic/tinylab-wechat.jpg' width='110px'/>
+<br/>
