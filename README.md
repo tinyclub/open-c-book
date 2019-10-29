@@ -1,6 +1,7 @@
-**关注作者公众号**：
+**配套视频课程已全面上线**：
 <br/>
-<img src='pic/tinylab-wechat.jpg' width='110px'/>
+<a title="10 个课时，20 份标准文档，45 份实验素材；数十张图表" href="https://w.url.cn/s/AMcKZ3a" target="_blank"><img src="/images/courses/elf-horizontal.jpg" style="max-height:250px; max-width:100%">
+</a>
 <br/>
 
 # C 语言编程透视
@@ -47,3 +48,10 @@ v 0.2
 * [Shell 编程范例](http://tinylab.gitbooks.io/shellbook/)
 * [嵌入式 Linux 知识库(eLinux.org 中文版)](http://tinylab.gitbooks.io/elinux/)
 * [Linux 内核文档(Linux Documentation/ 中文版)](http://tinylab.gitbooks.io/linux-doc/)
+
+<hr>
+
+**关注作者公众号**：
+<br/>
+<img src='pic/tinylab-wechat.jpg' width='110px'/>
+<br/>
