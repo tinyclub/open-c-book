@@ -1,6 +1,7 @@
-**关注作者公众号**：
+**配套视频课程已全面上线**：
 <br/>
-<img src='../../pic/tinylab-wechat.jpg' width='110px'/>
+<a title="10 个课时，20 份标准文档，45 份实验素材；数十张图表" href="https://w.url.cn/s/AMcKZ3a" target="_blank"><img src="pic/elf-horizontal.jpg" style="max-height:250px; max-width:100%">
+</a>
 <br/>
 
 # 缓冲区溢出与注入分析
@@ -1380,3 +1381,10 @@ ret=(int *)&ret+2=0xbfcfd2bc+2*4=0xbfcfd2c0
 -   [Linux下缓冲区溢出攻击的原理及对策](http://www.ibm.com/developerworks/cn/linux/l-overflow/index.html)
 -   [Linux 汇编语言开发指南](http://www.ibm.com/developerworks/cn/linux/l-assembly/index.html)
 -   [Shellcode 技术杂谈](http://janxin.bokee.com/4067220.html)
+
+<hr>
+
+**关注作者公众号**：
+<br/>
+<img src='../../pic/tinylab-wechat.jpg' width='110px'/>
+<br/>

@@ -1,6 +1,7 @@
-**关注作者公众号**：
+**配套视频课程已全面上线**：
 <br/>
-<img src='../../pic/tinylab-wechat.jpg' width='110px'/>
+<a title="10 个课时，20 份标准文档，45 份实验素材；数十张图表" href="https://w.url.cn/s/AMcKZ3a" target="_blank"><img src="pic/elf-horizontal.jpg" style="max-height:250px; max-width:100%">
+</a>
 <br/>
 
 # 动态符号链接的细节
@@ -850,3 +851,11 @@ Dump of assembler code for function puts:
  [14]: http://www.ibm.com/developerworks/cn/linux/l-elf/part2/index.html
  [15]: http://refspecs.linuxbase.org/elf/elf.pdf
  [16]: http://www.muppetlabs.com/~breadbox/software/ELF.txt
+
+<hr>
+
+**关注作者公众号**：
+<br/>
+<img src='../../pic/tinylab-wechat.jpg' width='110px'/>
+<br/>
+

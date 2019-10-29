@@ -43,6 +43,11 @@ v 0.2
 <img src="pic/tinylab-sponsor.jpg" width="110px"/>
 
 <span id="more"></span>
+
+### 本书配套视频课程
+
+<img src="pic/c-course-video.jpg"/>
+
 ### 更多原创开源书籍
 
 * [Shell 编程范例](http://tinylab.gitbooks.io/shellbook/)

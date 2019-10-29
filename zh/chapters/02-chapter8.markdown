@@ -1,6 +1,7 @@
-**关注作者公众号**：
+**配套视频课程已全面上线**：
 <br/>
-<img src='../../pic/tinylab-wechat.jpg' width='110px'/>
+<a title="10 个课时，20 份标准文档，45 份实验素材；数十张图表" href="https://w.url.cn/s/AMcKZ3a" target="_blank"><img src="pic/elf-horizontal.jpg" style="max-height:250px; max-width:100%">
+</a>
 <br/>
 
 # 打造史上最小可执行 ELF 文件（45 字节，可打印字符串）
@@ -1743,3 +1744,10 @@ $ wc -c hello
  [13]: http://162.105.203.48/web/gaikuang/submission/TN05.ELF.Format.Summary.pdf
  [14]: http://www.xfocus.net/articles/200105/174.html
  [15]: http://sparksandflames.com/files/x86InstructionChart.html
+
+<hr>
+
+**关注作者公众号**：
+<br/>
+<img src='../../pic/tinylab-wechat.jpg' width='110px'/>
+<br/>

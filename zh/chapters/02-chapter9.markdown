@@ -1,6 +1,7 @@
-**关注作者公众号**：
+**配套视频课程已全面上线**：
 <br/>
-<img src='../../pic/tinylab-wechat.jpg' width='110px'/>
+<a title="10 个课时，20 份标准文档，45 份实验素材；数十张图表" href="https://w.url.cn/s/AMcKZ3a" target="_blank"><img src="pic/elf-horizontal.jpg" style="max-height:250px; max-width:100%">
+</a>
 <br/>
 
 # 代码测试、调试与优化
@@ -679,3 +680,10 @@ Dumping 64 bytes of memory starting at 0x08048054 in hex
  [51]: http://www.tinylab.org/source-code-analysis-gprof2dot-draw-a-runtime-function-calls-the-c-program/
  [52]: http://www.tinylab.org/source-code-analysis-dynamic-analysis-of-linux-kernel-function-calls/
  [53]: http://www.tinylab.org/source-code-analysis-how-best-to-draw-a-function-call/
+
+<hr>
+
+**关注作者公众号**：
+<br/>
+<img src='../../pic/tinylab-wechat.jpg' width='110px'/>
+<br/>
