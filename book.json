@@ -10,9 +10,10 @@
     },
     "links": {
         "sidebar": {
-            "项目首页": "http://www.tinylab.org/open-c-book",
-            "泰晓科技": "http://www.tinylab.org",
-            "配套视频课程": "https://www.cctalk.com/m/group/88089283",
+            "泰晓科技-项目首页": "http://www.tinylab.org/open-c-book/",
+            "泰晓学院-视频课堂": "https://m.cctalk.com/inst/sh8qtdag",
+            "知识星球-Linux频道": "https://t.zsxq.com/uB2vJyF",
+            "开源小店-相关产品": "https://shop155917374.taobao.com/",
             "Shell 编程范例": "http://tinylab.gitbooks.io/shellbook"
         }
     },
