@@ -2,10 +2,11 @@
 
 |Revision |  Author          | From               |  Date      |  Description        |
 |---------|------------------|--------------------|------------|---------------------|
+|   0.4   |[@吴章金falcon][1]|[@泰晓科技][2]      | 2021/01/22 |  修订[视频地址][3]  |
 |   0.3   |[@吴章金falcon][1]|[@泰晓科技][2]      | 2019/10/30 |  [增加配套视频课程][3]  |
 |   0.2   |[@吴章金falcon][1]|[@泰晓科技][2]      | 2015/07/23 |  调整格式，修复链接 |
 |   0.1   |[@吴章金falcon][1]|[@泰晓科技][2]      | 2014/01/19 |  初稿               |
 
-[1]: http://weibo.com/wuzhangjin
-[2]: http://weibo.com/tinylaborg
-[3]: https://w.url.cn/s/AMcKZ3a
+[1]: https://www.zhihu.com/people/wuzhangjin
+[2]: http://tinylab.org
+[3]: https://www.cctalk.com/m/group/88089283
