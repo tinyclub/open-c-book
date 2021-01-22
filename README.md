@@ -1,8 +1,6 @@
 **[配套视频已上线](https://www.cctalk.com/m/group/88089283)**：55 节视频，80+ 份实验素材，独立代码仓库
-<br/>
-<a href="https://www.cctalk.com/m/group/88089283" target="_blank"><img src="pic/elf-horizontal.jpg" style="max-height:250px; max-width:100%">
-</a>
-<br/>
+
+[![360-elf](pic/elf-horizontal.jpg)](https://www.cctalk.com/m/group/88089283)
 
 # C 语言编程透视
 
