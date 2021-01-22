@@ -1,6 +1,6 @@
-**[配套视频已上线](https://w.url.cn/s/AMcKZ3a)**：10课时，20+份标准文档，70+份实验素材，数十张图表
+**[配套视频已上线](https://www.cctalk.com/m/group/88089283)**：55 节视频，80+ 份实验素材，独立代码仓库
 <br/>
-<a href="https://w.url.cn/s/AMcKZ3a" target="_blank"><img src="../../pic/elf-horizontal.jpg" style="max-height:250px; max-width:100%">
+<a href="https://www.cctalk.com/m/group/88089283" target="_blank"><img src="pic/elf-horizontal.jpg" style="max-height:250px; max-width:100%">
 </a>
 <br/>
 

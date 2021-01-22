@@ -1,12 +1,12 @@
-**[配套视频已上线](https://w.url.cn/s/AMcKZ3a)**：10课时，20+份标准文档，70+份实验素材，数十张图表
+**[配套视频已上线](https://www.cctalk.com/m/group/88089283)**：55 节视频，80+ 份实验素材，独立代码仓库
 <br/>
-<a href="https://w.url.cn/s/AMcKZ3a" target="_blank"><img src="pic/elf-horizontal.jpg" style="max-height:250px; max-width:100%">
+<a href="https://www.cctalk.com/m/group/88089283" target="_blank"><img src="pic/elf-horizontal.jpg" style="max-height:250px; max-width:100%">
 </a>
 <br/>
 
 # C 语言编程透视
 
-v 0.3
+v 0.4
 
 本书与[《深入淺出 Hello World》](http://blog.linux.org.tw/~jserv/archives/001844.html)有着类似的心路历程，旨在以实验的方式去探究类似 `Hello World` 这样的小程序在开发与执行过程中的微妙变化，一层层揭开 C 语言程序开发过程的神秘面纱，透视背后的秘密，不断享受醍醐灌顶的美妙。
 
@@ -43,10 +43,6 @@ v 0.3
 <img src="pic/tinylab-sponsor.jpg" width="110px"/>
 
 <span id="more"></span>
-
-### 本书配套视频课程
-
-<img src="pic/c-course-video.jpg"/>
 
 ### 更多原创开源书籍
 
